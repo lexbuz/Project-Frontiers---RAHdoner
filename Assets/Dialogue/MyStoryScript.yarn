@@ -1,4 +1,111 @@
-﻿title: Start
+﻿title: Loop1
 ---
-<<log "Hello world">>
+//LOOP 1 - Just your normal basic loop
+//(disable player controls) 
+//maybe a few sentences of conversation
+//phone rings
+PHONY: Gives orders, doesn't let you respond and the phone closes. - and says hurry up
+YOU: you sigh and convince yourself to do your work and tutorial starts after black fade in to stand up.
+
+//When you get the name/file thing, it's written on a small notepad ui that you can check anytime.
+
+TUTORIAL: you get a number from the phone guy and you go find the document in the archive
+TUTORIAL: pay attention to the A-Z letter on top of the shelf (for example)
+YOU: Ugh... 
+YOU: I should get to work.
+//(enable player controls) 
+//start timer FOUR minutes
+TUTORIAL: Look around holding down the right mouse button and by moving the mouse. 
+TUTORIAL: Move around using AWSD.
+TUTORIAL: Interact with objects by holding down the E button.
+YOU: something about going to the archive files, grumpy
+
+//The player then walks around, etc
 ===
+
+
+title: ArchiveShelf1
+---
+<<give_item “Player” “File1”>>
+YOU: There it is… //(or something of the sort)
+===
+
+title: Capsule1
+---
+// <<if has_item (“File1”)>>
+//     <<take_item “Player” “File1”>>
+// <<else>>
+// 	YOU: I don’t have the file, I should go get it.
+// <<endif>>
+===
+
+title: RingOfficeBack
+---
+//The phone starts ringing again from the distance, you have to get back to the office.
+YOU: Ah shit… I need to go back.
+
+===
+
+
+title: Loop2
+---
+//LOOP 2 - Maze
+PHONY: ANGRY as fCUk - heyyo boy get ya 2 file cases 
+PHONY: name of the files
+YOU: Oh, shit!
+//start timer as soon as you finish the phone call
+===
+
+title: ExitLoop2
+---
+//collider at the door of the archive node:
+YOU: What?... //reaction to the maze
+-> Better hurry up though, or he will scream again.
+	//set variable to -1
+-> I can do this… // positive
+	//set variable to +1
+===
+
+title: ArchiveShelf2
+---
+// <<give_item “Player” “File2”>>
+// <<if has_item (“File3”)>>
+// 	YOU: Finally.
+// <<else>>
+// YOU: Just one more left.
+// <<endif>>
+===
+
+title: ArchiveShelf3
+---
+// <<give_item “Player” “File3”>>
+// <<if has_item ("File2")>>
+// 	YOU: Finally.
+// <<else>>
+// YOU: Just one more left.
+// <<endif>>
+===
+
+title: Capsule2
+---
+// <<if has_item("Player", "File2")>>
+// 	<<if has_item (“File3”)>>
+// <<take_item “Player” “File2”>>
+// <<take_item “Player” “File3”>>
+// <<else>>
+// YOU: Not yet, I’m still missing something.
+// <<endif>>
+// <<else>>
+// 	YOU: Not yet, I’m still missing something.
+// <<endif>>
+===
+
+
+//<<elseif has_item “Player” “File3”>>
+//<<if has_item “Player” “File2”>>
+		//<<take_item “Player” “File2”>>
+//<<take_item “Player” “File3”>>
+//<<else>>
+//YOU: Not yet, I’m still missing something.
+//<<endif>>
+
