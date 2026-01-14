@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     float currentTime;
     public float startingTime = 10f;
     public TextMeshProUGUI countdownText;
+    public GameObject DeathScreen;
     void Start()
     {
         currentTime = startingTime;
@@ -22,7 +23,8 @@ public class Timer : MonoBehaviour
         else if (currentTime < 0)
         {
             currentTime = 0;
-            // Timer has finished, you can add additional logic here if needed
+            // Add here whatever needs to happen after the timer ends
+            DeathScreen.SetActive(true);
         }
 
         int minutes = Mathf.FloorToInt(currentTime / 60);
