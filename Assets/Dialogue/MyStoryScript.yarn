@@ -1,7 +1,8 @@
 ﻿title: Loop1
 ---
 //LOOP 1 - Just your normal basic loop
-//(disable player controls) 
+
+<<disable_controls "Player">>
 //maybe a few sentences of conversation
 //phone rings
 PHONY: Gives orders, doesn't let you respond and the phone closes. - and says hurry up
@@ -13,7 +14,8 @@ TUTORIAL: you get a number from the phone guy and you go find the document in th
 TUTORIAL: pay attention to the A-Z letter on top of the shelf (for example)
 YOU: Ugh... 
 YOU: I should get to work.
-//(enable player controls) 
+<<enable_controls "Player">>
+DEBUG: Here, a four minute timer should start.
 //start timer FOUR minutes
 TUTORIAL: Look around holding down the right mouse button and by moving the mouse. 
 TUTORIAL: Move around using AWSD.
@@ -26,17 +28,18 @@ YOU: something about going to the archive files, grumpy
 
 title: ArchiveShelf1
 ---
-<<give_item “Player” “File1”>>
-YOU: There it is… //(or something of the sort)
+<<give_item "Player" "File1">>
+YOU: There it is…
 ===
 
-title: Capsule1
+title: Capsule
 ---
-// <<if has_item (“File1”)>>
-//     <<take_item “Player” “File1”>>
-// <<else>>
-// 	YOU: I don’t have the file, I should go get it.
-// <<endif>>
+<<if has_item("Player", "File1")>>
+    <<take_item "Player" "File1">>
+	YOU: There we go.
+<<else>>
+	YOU: I don’t have the file, I should go get it.
+<<endif>>
 ===
 
 title: RingOfficeBack
