@@ -1,114 +1,222 @@
 ﻿title: Loop1
 ---
-//LOOP 1 - Just your normal basic loop
+<<declare $loop = 1>>
+<<declare $stresslvl = 1>>
 
 <<disable_controls "Player">>
-//maybe a few sentences of conversation
-//phone rings
+
+DEBUG: The player is seeing the computer UI
+DEBUG: It does not exist yet
+DEBUG: The phone rings
+
 PHONY: Gives orders, doesn't let you respond and the phone closes. - and says hurry up
+
+DEBUG: we enable the UI with the case file number 
+DEBUG: so the player can see what file there is
+
 YOU: you sigh and convince yourself to do your work and tutorial starts after black fade in to stand up.
-
-//When you get the name/file thing, it's written on a small notepad ui that you can check anytime.
-
 TUTORIAL: you get a number from the phone guy and you go find the document in the archive
 TUTORIAL: pay attention to the A-Z letter on top of the shelf (for example)
 YOU: Ugh... 
 YOU: I should get to work.
 <<enable_controls "Player">>
-DEBUG: Here, a four minute timer should start.
-//start timer FOUR minutes
+<<set_enabled_in_unity "TimerCanvas" true>>
+
 TUTORIAL: Look around holding down the right mouse button and by moving the mouse. 
 TUTORIAL: Move around using AWSD.
 TUTORIAL: Interact with objects by holding down the E button.
-YOU: something about going to the archive files, grumpy
 
-//The player then walks around, etc
 ===
 
-
-title: ArchiveShelf1
+title: Loop2
 ---
-<<give_item "Player" "File1">>
-YOU: There it is…
+<<disable_controls "Player">>
+<<set $loop = 2>>
+<<set_enabled_in_unity "TimerCanvas2" false>>
+
+DEBUG: Laptop view here? doesn't matter. 
+DEBUG: The player picks up the phone.
+
+PHONY: (ANGRY as hell) - heyyo boy get ya 2 file cases (scolding you)
+PHONY: name of the files to get (file 2 and file3)
+PHONY: for now, they are green
+YOU: Oh, shit!
+<<set_enabled_in_unity "Loop2Start" false>>
+PHONY: hurry up, insult to humanity
+
+DEBUG: Here we also enable the UI with the notepad for the files
+
+<<set_enabled_in_unity "TimerCanvas3" true>>
+<<enable_controls "Player">>
 ===
 
 title: Capsule
 ---
-<<if has_item("Player", "File1")>>
-    <<take_item "Player" "File1">>
-	YOU: There we go.
-<<else>>
-	YOU: I don’t have the file, I should go get it.
+<<disable_controls "Player">>
+<<if $loop == 1>>
+	<<if has_item("Player", "File1")>>
+		<<take_item "Player" "File1">>
+		<<set_enabled_in_unity "TimerCanvas" false>>
+		YOU: There we go.
+		<<set_enabled_in_unity "Loop1end" true>>
+	<<else>>
+		YOU: I don’t have the file, I should go get it.
+		<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+		<<endif>>
+	<<endif>>
+<<elseif $loop == 2>>
+	<<if has_item("Player", "File2")>>
+		<<if has_item("Player", "File3")>>
+			<<set_enabled_in_unity "TimerCanvas3" false>>
+			YOU: Perfect...
+
+			DEBUG: play sound for the file being inserted into the capsule
+
+			<<set_enabled_in_unity "room insides loop 1" false>>
+			<<set_enabled_in_unity "room insides loop 2" true>>
+			<<set_enabled_in_unity "Monster" true>>
+			<<set_enabled_in_unity "MonsterSee" true>>
+
+			DEBUG: the phone should ring distantly now
+			DEBUG: it should sound WRONG
+
+			YOU: Alright, time to go back.
+			YOU: Or he will snap at me again...
+		<<else>>
+			YOU: I don’t have all the files yet, I should go get them.
+			<<set $stresslvl = $stresslvl + 1>>
+			<<if $stresslvl == 2>>
+				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+			<<endif>>
+		<<endif>>
+	<<else>>
+		YOU: I don’t have all the files yet, I should go get them.
+			<<set $stresslvl = $stresslvl + 1>>
+			<<if $stresslvl == 2>>
+				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+			<<endif>>
+	<<endif>>
 <<endif>>
-===
 
-title: RingOfficeBack
----
-//The phone starts ringing again from the distance, you have to get back to the office.
-YOU: Ah shit… I need to go back.
+<<enable_controls "Player">>
 
 ===
 
-
-title: Loop2
+title: RingOfficeBack1
 ---
-//LOOP 2 - Maze
-PHONY: ANGRY as fCUk - heyyo boy get ya 2 file cases 
-PHONY: name of the files
-YOU: Oh, shit!
-//start timer as soon as you finish the phone call
+<<disable_controls "Player">>
+
+DEBUG: The phone starts ringing again from the distance, 
+DEBUG: it makes the player want to get back to the office
+
+YOU: Ah shit... The phone...
+YOU: I need to go back to my office.
+<<set_enabled_in_unity "printerloop1" false>>
+<<set_enabled_in_unity "Loop1end" false>>
+<<set_enabled_in_unity "PrinterSee" true>>
+<<enable_controls "Player">>
 ===
 
-title: ExitLoop2
+title:PrinterSee
 ---
-//collider at the door of the archive node:
-YOU: What?... //reaction to the maze
--> Better hurry up though, or he will scream again.
-	//set variable to -1
--> I can do this… // positive
-	//set variable to +1
+<<disable_controls "Player">>
+YOU: Huh... Wasn't there something here before?
+YOU: I better hurry though...
+
+DEBUG: The phone could ring here as well
+
+<<set_enabled_in_unity "TimerCanvas2" true>>
+<<set_enabled_in_unity "Loop2Start" true>>
+<<enable_controls "Player">>
+===
+
+title: MonsterSee
+---
+<<disable_controls "Player">>
+YOU: Huh...? (this will be polished later)
+
+DEBUG: The monster is just standing there FOR NOW
+
+<<set_enabled_in_unity "MonsterSee" false>>
+<<enable_controls "Player">>
+===
+
+title: ArchiveShelf1
+---
+<<disable_controls "Player">>
+<<if $loop == 1>>
+	<<give_item "Player" "File1">>
+	YOU: There it is…
+
+	DEBUG: here we disable the notepad ui
+
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
 ===
 
 title: ArchiveShelf2
 ---
-// <<give_item “Player” “File2”>>
-// <<if has_item (“File3”)>>
-// 	YOU: Finally.
-// <<else>>
-// YOU: Just one more left.
-// <<endif>>
+<<disable_controls "Player">>
+<<if $loop == 1>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+		<<endif>>
+<<elseif $loop == 2>>
+	<<if not has_item ("Player", "File2")>>
+		<<give_item "Player" "File2">>
+			<<if has_item("Player", "File3")>>
+			YOU: Finally, now the capsule.
+
+			DEBUG: here we also disable the notepad ui
+
+			<<else>>
+			YOU: Just one more.
+			<<endif>>
+		<<else>> // for now we don't have loop 3, so this is useless - may be useful later tho
+			<<set $stresslvl = $stresslvl + 1>>
+				<<if $stresslvl == 2>>
+					TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+				<<endif>>
+	<<endif>>
+<<endif>>
+<<enable_controls "Player">>
 ===
 
 title: ArchiveShelf3
 ---
-// <<give_item “Player” “File3”>>
-// <<if has_item ("File2")>>
-// 	YOU: Finally.
-// <<else>>
-// YOU: Just one more left.
-// <<endif>>
+<<disable_controls "Player">>
+<<if $loop == 1>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+		<<endif>>
+<<elseif $loop == 2>>
+	<<if not has_item ("Player", "File3")>>
+		<<give_item "Player" "File3">>
+			<<if has_item("Player", "File2")>>
+			YOU: Finally, now the capsule.
+
+			DEBUG: here we also disable the notepad ui
+
+			<<else>>
+			YOU: Just one more.
+			<<endif>>
+		<<else>> // for now we don't have loop 3, so this is useless - may be useful later tho
+			<<set $stresslvl = $stresslvl + 1>>
+				<<if $stresslvl == 2>>
+					TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+				<<endif>>
+	<<endif>>
+<<endif>>
+<<enable_controls "Player">>
 ===
 
-title: Capsule2
----
-// <<if has_item("Player", "File2")>>
-// 	<<if has_item (“File3”)>>
-// <<take_item “Player” “File2”>>
-// <<take_item “Player” “File3”>>
-// <<else>>
-// YOU: Not yet, I’m still missing something.
-// <<endif>>
-// <<else>>
-// 	YOU: Not yet, I’m still missing something.
-// <<endif>>
-===
-
-
-//<<elseif has_item “Player” “File3”>>
-//<<if has_item “Player” “File2”>>
-		//<<take_item “Player” “File2”>>
-//<<take_item “Player” “File3”>>
-//<<else>>
-//YOU: Not yet, I’m still missing something.
-//<<endif>>
 
