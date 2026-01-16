@@ -1,26 +1,37 @@
 ﻿title: Loop1
 ---
+
 <<declare $loop = 1>>
 <<declare $stresslvl = 1>>
+<<declare $files = 0>>
 
 <<disable_controls "Player">>
 
-DEBUG: The player is seeing the computer UI
-DEBUG: It does not exist yet
-DEBUG: The phone rings
+DEBUG: The player is sitting at the computer (forced camera)
 
-PHONY: Gives orders, doesn't let you respond and the phone closes. - and says hurry up
+YOU: Ughh... I hope that asshole from upstairs doesn't bother me today.
+YOU: Some more grumpy lines
 
-DEBUG: we enable the UI with the case file number 
-DEBUG: so the player can see what file there is
+DEBUG: The phone rings and the camera is forced at it
 
-YOU: you sigh and convince yourself to do your work and tutorial starts after black fade in to stand up.
-TUTORIAL: you get a number from the phone guy and you go find the document in the archive
-TUTORIAL: pay attention to the A-Z letter on top of the shelf (for example)
+YOU: Speak of the devil...
+PHONY: Hey you lazy bastard get files bla bla bla (in this loop they are grey)
+
+DEBUG: we enable the UI note with the case file number 
+
+YOU: Some grumpy lines, but generally fake polite 
+
+DEBUG: You stand up from the pc, the camera is changed to the normal one now
+DEBUG: ADD tutorial 
+//you get a number from the phone guy and you go find the document in the archive
+//pay attention to the A-Z letter on top of the shelf (for example)
+
 YOU: Ugh... 
 YOU: I should get to work.
 <<enable_controls "Player">>
 <<set_enabled_in_unity "TimerCanvas" true>>
+
+DEBUG: For now, tutorial is in yarnspinner, later it will be UI (+ Csharp?)
 
 TUTORIAL: Look around holding down the right mouse button and by moving the mouse. 
 TUTORIAL: Move around using AWSD.
@@ -30,193 +41,520 @@ TUTORIAL: Interact with objects by holding down the E button.
 
 title: Loop2
 ---
+
 <<disable_controls "Player">>
+
+DEBUG: we back at office
+DEBUG: new task is given to us, more files - green
+
 <<set $loop = 2>>
+<<set_enabled_in_unity "Loop2Start" false>>
+<<set_enabled_in_unity "TimerCanvas2" true>>
+<<set_enabled_in_unity "Loop1" false>>
+<<set_enabled_in_unity "Loop2" true>>
 <<set_enabled_in_unity "TimerCanvas2" false>>
 
-DEBUG: Laptop view here? doesn't matter. 
-DEBUG: The player picks up the phone.
-
-PHONY: (ANGRY as hell) - heyyo boy get ya 2 file cases (scolding you)
-PHONY: name of the files to get (file 2 and file3)
-PHONY: for now, they are green
-YOU: Oh, shit!
-<<set_enabled_in_unity "Loop2Start" false>>
 PHONY: hurry up, insult to humanity
 
-DEBUG: Here we also enable the UI with the notepad for the files
+DEBUG: Here we also enable the UI with the notepad for the files again
+DEBUG: this loop is the sound messing loop, racks are also different a bit
 
 <<set_enabled_in_unity "TimerCanvas3" true>>
 <<enable_controls "Player">>
 ===
 
+title: Loop3
+---
+<<disable_controls "Player">>
+
+<<set $loop = 3>>
+<<set_enabled_in_unity "TimerCanvas4" false>>
+<<set_enabled_in_unity "Loop3Start" false>>
+<<set_enabled_in_unity "Loop2" false>>
+<<set_enabled_in_unity "Loop3" true>>
+<<set_enabled_in_unity "MonsterLoop3" true>>
+
+DEBUG: all the basic stuff, file task, etc 
+DEBUG: but a bit more distortion
+DEBUG: enable ui for files
+
+<<set_enabled_in_unity "TimerCanvas5" true>>
+
+<<enable_controls "Player">>
+===
+
+title:Loop4
+---
+<<disable_controls "Player">>
+
+<<set $loop = 4>>
+<<set_enabled_in_unity "TimerCanvas6" false>>
+<<set_enabled_in_unity "Loop4Start" false>>
+<<set_enabled_in_unity "Loop3" false>>
+<<set_enabled_in_unity "Loop4" true>>
+<<set_enabled_in_unity "MonsterLoop3" false>>
+<<set_enabled_in_unity "MonsterLoop4" true>>
+
+PHONY: new files, blah blah blah
+DEBUG: enable UI for notes ab files
+
+<<set_enabled_in_unity "MonsterLook4" true>>
+
+<<enable_controls "Player">>
+===
+
+title: Loop4Monster
+---
+<<disable_controls "Player">>
+
+DEBUG: camera is forced to look at Monster, he now walks after player
+<<set_enabled_in_unity "TimerCanvas7" true>>
+<<enable_controls "Player">>
+
+// <<walk_to "MonsterLoop4" "Player" false>>
+
+===
 title: Capsule
 ---
 <<disable_controls "Player">>
+
 <<if $loop == 1>>
-	<<if has_item("Player", "File1")>>
-		<<take_item "Player" "File1">>
+	<<if $files == 2>>
 		<<set_enabled_in_unity "TimerCanvas" false>>
+		<<set $files = 0>>
+		DEBUG: play sound of capsule inserted
 		YOU: There we go.
-		<<set_enabled_in_unity "Loop1end" true>>
+		YOU: All done now.
+		DEBUG: play sound of rack falling
+		<<set_enabled_in_unity "RackLoop1" false>>
+		<<set_enabled_in_unity "RackFallen" true>>
+		YOU: huh...? what was that?
+		<<set_enabled_in_unity "RingOfficeBack1" true>>
 	<<else>>
-		YOU: I don’t have the file, I should go get it.
+		YOU: I don’t have the files yet, I should go get them.
 		<<set $stresslvl = $stresslvl + 1>>
 		<<if $stresslvl == 2>>
 			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
 		<<endif>>
+		<<if $stresslvl == 6>>
+			<<set_enabled_in_unity "DIE" true>>
+			<<endif>>
 	<<endif>>
 <<elseif $loop == 2>>
-	<<if has_item("Player", "File2")>>
-		<<if has_item("Player", "File3")>>
+	<<if $files == 3>>
 			<<set_enabled_in_unity "TimerCanvas3" false>>
+			<<set $files = 0>>
 			YOU: Perfect...
-
 			DEBUG: play sound for the file being inserted into the capsule
-
-			<<set_enabled_in_unity "room insides loop 1" false>>
-			<<set_enabled_in_unity "room insides loop 2" true>>
-			<<set_enabled_in_unity "Monster" true>>
-			<<set_enabled_in_unity "MonsterSee" true>>
-
 			DEBUG: the phone should ring distantly now
 			DEBUG: it should sound WRONG
-
 			YOU: Alright, time to go back.
 			YOU: Or he will snap at me again...
-		<<else>>
-			YOU: I don’t have all the files yet, I should go get them.
-			<<set $stresslvl = $stresslvl + 1>>
-			<<if $stresslvl == 2>>
-				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-			<<endif>>
-		<<endif>>
+			<<set_enabled_in_unity "TimerCanvas4" true>>
+			<<set_enabled_in_unity "Loop3Start" true>>
 	<<else>>
 		YOU: I don’t have all the files yet, I should go get them.
 			<<set $stresslvl = $stresslvl + 1>>
 			<<if $stresslvl == 2>>
 				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
 			<<endif>>
+			<<if $stresslvl == 6>>
+			<<set_enabled_in_unity "DIE" true>>
+			<<endif>>
+	<<endif>>
+<<elseif $loop == 3>>
+	<<if $files == 3>>
+		<<set_enabled_in_unity "TimerCanvas5" false>>
+		<<set $files = 0>>
+		DEBUG: play sound of inserting capsule 
+		DEBUG: the phone should ring and sound even worse now
+		YOU: i better get back to the office...
+		<<set_enabled_in_unity "TimerCanvas6" true>>
+		<<set_enabled_in_unity "Loop4Start" true>>
+	<<else>>
+		YOU: I don’t have all the files yet, I should go get them.
+			<<set $stresslvl = $stresslvl + 1>>
+			<<if $stresslvl == 2>>
+				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+			<<endif>>
+			<<if $stresslvl == 6>>
+			<<set_enabled_in_unity "DIE" true>>
+			<<endif>>
+	<<endif>>
+<<elseif $loop == 4>>
+	<<if $files == 3>>
+		<<set_enabled_in_unity "TimerCanvas7" false>>
+		<<set_enabled_in_unity "MonsterLoop4" false>>
+		<<set_enabled_in_unity "Loop4" false>>
+		<<set_enabled_in_unity "main" false>>
+		<<set_enabled_in_unity "Loop4chase" true>>
+		<<set_enabled_in_unity "MonsterLoop4Chase" true>>
+		<<set $files = 0>>
+		DEBUG: play sound of inserting capsule 
+		<<set_enabled_in_unity "MonsterLookChase" true>>
+		<<set_enabled_in_unity "ENDING" true>>
+	<<else>>
+		YOU: I don’t have all the files yet, I should go get them.
+			<<set $stresslvl = $stresslvl + 1>>
+			<<if $stresslvl == 2>>
+				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+			<<endif>>
+			<<if $stresslvl == 6>>
+			<<set_enabled_in_unity "DIE" true>>
+			<<endif>>
 	<<endif>>
 <<endif>>
 
 <<enable_controls "Player">>
-
 ===
 
 title: RingOfficeBack1
 ---
 <<disable_controls "Player">>
 
+YOU: What happened to this rack?
+
 DEBUG: The phone starts ringing again from the distance, 
 DEBUG: it makes the player want to get back to the office
 
 YOU: Ah shit... The phone...
 YOU: I need to go back to my office.
-<<set_enabled_in_unity "printerloop1" false>>
-<<set_enabled_in_unity "Loop1end" false>>
-<<set_enabled_in_unity "PrinterSee" true>>
-<<enable_controls "Player">>
-===
-
-title:PrinterSee
----
-<<disable_controls "Player">>
-YOU: Huh... Wasn't there something here before?
-YOU: I better hurry though...
-
-DEBUG: The phone could ring here as well
 
 <<set_enabled_in_unity "TimerCanvas2" true>>
+<<set_enabled_in_unity "RingOfficeBack1" false>>
 <<set_enabled_in_unity "Loop2Start" true>>
+
 <<enable_controls "Player">>
 ===
 
-title: MonsterSee
+title: MonsterLookChase
 ---
-<<disable_controls "Player">>
-YOU: Huh...? (this will be polished later)
-
-DEBUG: The monster is just standing there FOR NOW
-
-<<set_enabled_in_unity "MonsterSee" false>>
-<<enable_controls "Player">>
+DEBUG: here we are forced to look at the monster before we run
+//<<walk_to "MonsterLoop4Chase" "Player" false>>
 ===
 
-title: ArchiveShelf1
+title: ArchiveShelf11
 ---
 <<disable_controls "Player">>
 <<if $loop == 1>>
-	<<give_item "Player" "File1">>
-	YOU: There it is…
-
-	DEBUG: here we disable the notepad ui
-
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File1.1" false>>
+	<<if $files == 1>>
+		YOU: Just one more left
+	<<elseif $files == 2>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
 <<else>>
 	<<set $stresslvl = $stresslvl + 1>>
 		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
 		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 ===
 
-title: ArchiveShelf2
+title: ArchiveShelf12
 ---
+
 <<disable_controls "Player">>
 <<if $loop == 1>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File1.2" false>>
+	<<if $files == 1>>
+		YOU: Just one more left
+	<<elseif $files == 2>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
 	<<set $stresslvl = $stresslvl + 1>>
 		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+			TUTORIAL: explaining how stress and mistakes work
 		<<endif>>
-<<elseif $loop == 2>>
-	<<if not has_item ("Player", "File2")>>
-		<<give_item "Player" "File2">>
-			<<if has_item("Player", "File3")>>
-			YOU: Finally, now the capsule.
-
-			DEBUG: here we also disable the notepad ui
-
-			<<else>>
-			YOU: Just one more.
-			<<endif>>
-		<<else>> // for now we don't have loop 3, so this is useless - may be useful later tho
-			<<set $stresslvl = $stresslvl + 1>>
-				<<if $stresslvl == 2>>
-					TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-				<<endif>>
-	<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
+
 ===
 
-title: ArchiveShelf3
+title: ArchiveShelf21
 ---
 <<disable_controls "Player">>
-<<if $loop == 1>>
+<<if $loop == 2>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File2.1" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
 	<<set $stresslvl = $stresslvl + 1>>
 		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+			TUTORIAL: explaining how stress and mistakes work
 		<<endif>>
-<<elseif $loop == 2>>
-	<<if not has_item ("Player", "File3")>>
-		<<give_item "Player" "File3">>
-			<<if has_item("Player", "File2")>>
-			YOU: Finally, now the capsule.
-
-			DEBUG: here we also disable the notepad ui
-
-			<<else>>
-			YOU: Just one more.
-			<<endif>>
-		<<else>> // for now we don't have loop 3, so this is useless - may be useful later tho
-			<<set $stresslvl = $stresslvl + 1>>
-				<<if $stresslvl == 2>>
-					TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-				<<endif>>
-	<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 ===
 
+title: ArchiveShelf22
+---
+<<disable_controls "Player">>
+<<if $loop == 2>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File2.2" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+===
 
+title: ArchiveShelf23
+---
+<<disable_controls "Player">>
+<<if $loop == 2>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File2.3" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+===
+
+title: ArchiveShelf31
+---
+<<disable_controls "Player">>
+<<if $loop == 3>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File3.1" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+===
+
+title: ArchiveShelf32
+---
+<<disable_controls "Player">>
+<<if $loop == 3>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File3.2" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+===
+
+title: ArchiveShelf33
+---
+<<disable_controls "Player">>
+<<if $loop == 3>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File3.3" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+===
+
+title: ArchiveShelf41
+---
+<<disable_controls "Player">>
+<<if $loop == 4>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File4.1" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+
+//<<walk_to "MonsterLoop4" "Player" false>>
+===
+
+title: ArchiveShelf42
+---
+<<disable_controls "Player">>
+<<if $loop == 4>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File4.2" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+
+//<<walk_to "MonsterLoop4" "Player" false>>
+===
+
+title: ArchiveShelf43
+---
+<<disable_controls "Player">>
+<<if $loop == 4>>
+	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "File4.3" false>>
+	<<if $files == 1>>
+		YOU: Just two more left
+	<<elseif $files == 2>>
+		YOU: One more needed.
+	<<elseif $files == 3>>
+		YOU: All done. Capsule room now.
+		DEBUG: disable notepad ui
+	<<endif>>
+<<else>>
+	<<set $stresslvl = $stresslvl + 1>>
+		<<if $stresslvl == 2>>
+			TUTORIAL: explaining how stress and mistakes work
+		<<endif>>
+		<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+		<<endif>>
+<<endif>>
+<<enable_controls "Player">>
+
+//<<walk_to "MonsterLoop4" "Player" false>>
+===
+
+
+title: DecoyShelf
+---
+
+<<set $stresslvl = $stresslvl + 1>>
+	<<if $stresslvl == 2>>
+		TUTORIAL: explaining how stress and mistakes work (idk if we need this)
+	<<endif>>
+	<<if $stresslvl == 6>>
+		<<set_enabled_in_unity "DIE" true>>
+	<<endif>>
+
+===
+
+title: Pills
+---
+
+<<set $stresslvl = 0>>
+YOU: you feel better
+
+===
+
+title: MonsterLoop3
+---
+<<disable_controls "Player">>
+<<set_enabled_in_unity "DIE" true>>
+===
+
+title: Ending
+---
+<<set_enabled_in_unity "MonsterLoop4Chase" false>>
+<<disable_controls "Player">>
+DEBUG: you win, etc
+<<set_enabled_in_unity "DIE" true>>
+===
