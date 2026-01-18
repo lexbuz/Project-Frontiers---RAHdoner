@@ -32,4 +32,13 @@ public class MonsterBehaviour : MonoBehaviour
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
+    private void Teleport()
+    {
+        Vector3 randomPosition = new Vector3(
+            Random.Range(-50f, 50f),
+            0f,
+            Random.Range(-50f, 50f)
+        );
+        agent.Warp(randomPosition);
+    }
 }
