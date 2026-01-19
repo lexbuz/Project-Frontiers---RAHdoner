@@ -9,6 +9,11 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private Transform[] teleportPoints;
     [SerializeField] private Transform player;
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject loopThree;
+    [SerializeField] private GameObject speedToggle;
+    public float slowChaseSpeed;
+    public float fastChaseSpeed;
+
     private NavMeshAgent agent;
     private int currentPatrolIndex = 0;
     private int currentTeleportIndex = 0;
@@ -23,19 +28,31 @@ public class MonsterBehaviour : MonoBehaviour
     }
     void Update()
     {
-        Patrol();
-        if (!isTeleporting) 
+        if (loopThree.activeInHierarchy)
         {
-        isTeleporting = true;
-        StartCoroutine(Teleport());
-        }
-        if (player != null)
-        {
-            bool inRange = Vector3.Distance(transform.position, player.position) < 1.2f;
-            if (inRange)
+            Patrol();
+            if (!isTeleporting) 
             {
-                StartCoroutine(LookAtPlayer());
-                StartCoroutine(JumpScare());
+            isTeleporting = true;
+            StartCoroutine(Teleport());
+            }
+            if (player != null)
+            {
+                bool inRange = Vector3.Distance(transform.position, player.position) < 1.2f;
+                if (inRange)
+                {
+                    StartCoroutine(LookAtPlayer());
+                    StartCoroutine(JumpScare());
+                }
+            }
+        }
+        else
+        {
+            agent.speed = slowChaseSpeed;
+            Chase();
+            if (speedToggle.activeInHierarchy)
+            {
+                agent.speed = fastChaseSpeed;
             }
         }
     }
@@ -76,5 +93,12 @@ public class MonsterBehaviour : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         deathScreen.SetActive(true);
         yield return null;
+    }
+    private void Chase()
+    {
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+        }
     }
 }
