@@ -229,8 +229,10 @@ YOU: I need to go back to my office.
 
 title: MonsterLookChase
 ---
+<<disable_controls "Player">>
 DEBUG: here we are forced to look at the monster before we run
 //<<walk_to "MonsterLoop4Chase" "Player" false>>
+<<enable_controls "Player">>
 ===
 
 title: ArchiveShelf11
