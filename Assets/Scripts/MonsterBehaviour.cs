@@ -10,6 +10,7 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject loopThree;
+    [SerializeField] private GameObject loopFour;
     [SerializeField] private GameObject speedToggle;
     public float slowChaseSpeed;
     public float fastChaseSpeed;
@@ -33,8 +34,8 @@ public class MonsterBehaviour : MonoBehaviour
             Patrol();
             if (!isTeleporting) 
             {
-            isTeleporting = true;
-            StartCoroutine(Teleport());
+                isTeleporting = true;
+                StartCoroutine(Teleport());
             }
             if (player != null)
             {
@@ -43,16 +44,27 @@ public class MonsterBehaviour : MonoBehaviour
                 {
                     StartCoroutine(LookAtPlayer());
                     StartCoroutine(JumpScare());
+                    
                 }
             }
         }
-        else
+        else if (loopFour.activeInHierarchy)
         {
             agent.speed = slowChaseSpeed;
             Chase();
             if (speedToggle.activeInHierarchy)
             {
                 agent.speed = fastChaseSpeed;
+            }
+            if (player != null)
+            {
+                bool inRange = Vector3.Distance(transform.position, player.position) < 1.2f;
+                if (inRange)
+                {
+                    StartCoroutine(LookAtPlayer());
+                    StartCoroutine(JumpScare());
+                    
+                }
             }
         }
     }
@@ -68,6 +80,7 @@ public class MonsterBehaviour : MonoBehaviour
         if (patrolPoints.Length == 0) return;
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+        Debug.Log("Choosing patrol point " + currentPatrolIndex);
     }
     IEnumerator Teleport()
     {
