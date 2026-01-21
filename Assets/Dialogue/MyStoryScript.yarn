@@ -55,7 +55,7 @@ title: Loop2
 <<disable_controls "Player">>
 
 Boss:  Starting to think you're down there wanking or something.
-Boss: How many times do I have to tell you to picl up that phone right away?!
+Boss: How many times do I have to tell you to pick up that phone right away?!
 
 Player: I-
 
@@ -75,6 +75,7 @@ DEBUG: this loop is the sound messing loop, racks are also different a bit
 <<set_enabled_in_unity "TimerCanvas3" true>>
 <<enable_controls "Player">>
 //idk which node is supposed to go here next logically :/ i think i'm gonna have to make on myself (alexandra)
+// the node for the capsule, after the player gathers the files (fran)
 //logically, move to LoopTrigger node next
 ===
 
@@ -133,14 +134,12 @@ title: Loop4Monster
 DEBUG: camera is forced to look at Monster, he now walks after player
 <<set_enabled_in_unity "TimerCanvas7" true>>
 <<enable_controls "Player">>
-
-// <<walk_to "MonsterLoop4" "Player" false>>
-
 ===
 title: Capsule
 ---
 <<disable_controls "Player">>
 //again?? not sure why disabling controls is necessary here (alexandra)
+//so they dont walk off DURING dialogue, stuff might still be happening (fran)
 
 <<if $loop == 1>>
 	<<if $files == 2>>
@@ -163,6 +162,7 @@ title: Capsule
 		Player: I don’t have the files yet, I should go get them.
 		<<set $stresslvl = $stresslvl + 1>>
 		<<if $stressTutorial == false>> //i think it's better if we show the tutorial only once so i made boolean that checks that (alexandra)
+		// i agree with this, let's do it... the issue is that we dont know WHEN the player makes the mistake, so i would add this boolean anytime there is a mistake (we could also do a separate stress node into which the yarnspinner will jump - so we dont have to copypaste it everywhere) (fran)
 			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
 			<<set $stressTutorial = true>>
 		<<endif>>
@@ -186,6 +186,7 @@ title: Capsule
 			<<set_enabled_in_unity "TimerCanvas4" true>>
 			<<set_enabled_in_unity "Loop3Start" true>>
 	<<else>> //personal opinion: i wouldn't repeat the stress tutorial everytime this mistake happens (alexandra)
+			// the tutorial happens only if the stress level is 2... but good point, cuz we can actually now RESTORE our sanity (fran), i think we can do ONe stress tutorial and delete the rest
 		Player: I don’t have all the files yet, I should go get them.
 			<<set $stresslvl = $stresslvl + 1>>
 			<<if $stresslvl == 2>>
@@ -280,15 +281,6 @@ Player: ...whatever. Shouldn't make him wait.
 //logically, move to Loop2 node next
 ===
 
-title: MonsterLookChase
----
-//def getting rid of this (alexandra)
-<<disable_controls "Player">>
-DEBUG: here we are forced to look at the monster before we run
-//<<walk_to "MonsterLoop4Chase" "Player" false>>
-<<enable_controls "Player">>
-===
-
 title: ArchiveShelf11
 ---
 //name: archive shelf loop 1 file 1
@@ -306,17 +298,6 @@ title: ArchiveShelf11
 		Player: That should be all.
 		DEBUG: disable notepad ui
 	<<endif>>
-//this explains stress logic - if the player picks up a wrong file, stress increases
-//assigned to decoys inside unity
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stressTutorial == false>>
-			TUTORIAL: explaining how stress and mistakes work
-			<<set $stressTutorial = true>>
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to ArchiveShelf12 node next
@@ -338,17 +319,6 @@ title: ArchiveShelf12
 		Player: That should be all.
 		DEBUG: disable notepad ui
 	<<endif>>
-//this explains stress logic - if the player picks up a wrong file, stress increases
-//assigned to decoys inside unity
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stressTutorial == false>>
-			TUTORIAL: explaining how stress and mistakes work
-			<<set $stressTutorial = true>>
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to Capsule node next
@@ -370,16 +340,6 @@ title: ArchiveShelf21
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>> //this whole else block exists in a separate node as well, i'm not sure how to proceed (alexandra)
-//i think i'll just end up using the separate node, since it's neater, but i have to check in unity first (alexandra)
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stressTutorial == false>>
-			TUTORIAL: explaining how stress and mistakes work
-			<<set $stressTutorial = true>>
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to ArchiveShelf22 node next
@@ -401,14 +361,6 @@ title: ArchiveShelf22
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to ArchiveShelf23 node next
@@ -430,14 +382,6 @@ title: ArchiveShelf23
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to Capsule node next
@@ -459,14 +403,6 @@ title: ArchiveShelf31
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to ArchiveShelf32 node next
@@ -488,14 +424,6 @@ title: ArchiveShelf32
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to ArchiveShelf33 node next
@@ -517,14 +445,6 @@ title: ArchiveShelf33
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to Capsule node next
@@ -546,20 +466,9 @@ title: ArchiveShelf41
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to ArchiveShelf42 node next
-
-//<<walk_to "MonsterLoop4" "Player" false>>
-//^^ nope <3 (alexandra)
 ===
 
 title: ArchiveShelf42
@@ -578,19 +487,9 @@ title: ArchiveShelf42
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to ArchiveShelf43 node next
-
-//<<walk_to "MonsterLoop4" "Player" false>>
 ===
 
 title: ArchiveShelf43
@@ -609,25 +508,15 @@ title: ArchiveShelf43
 		Player: That should be all. Capsule room now.
 		DEBUG: disable notepad ui
 	<<endif>>
-<<else>>
-	<<set $stresslvl = $stresslvl + 1>>
-		<<if $stresslvl == 2>>
-			TUTORIAL: explaining how stress and mistakes work
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-		<<endif>>
 <<endif>>
 <<enable_controls "Player">>
 //logically, move to Capsule node next
-
-//<<walk_to "MonsterLoop4" "Player" false>>
-//^^^ umm???? (alexandra)
 ===
 
 title: LoopTrigger
 ---
 //i would just reuse this node for all loop reactions
+//i love this idea, actually (fran)
 <<disable_controls "Player">>
 <<if $loop == 2>>
 	Player: Why am I seeing things again...
@@ -655,6 +544,7 @@ title: DecoyShelf
 //WHAT HAPPENED IN THIS SCRIPT (alexandra)
 //i'm ab to kms not even kidding (alexandra)
 //now in all seriousness, this code already happens in every archiveshelf node, i'm not sure what's the purpose of this or if the other nodes were simply not updated (alexandra)
+// the other nodes... i am stupid. this already does the job, cleaning up the other nodes makes sense. (fran)
 <<set $stresslvl = $stresslvl + 1>>
 	<<if $stressTutorial == false>>
 		TUTORIAL: explaining how stress and mistakes work (idk if we need this)
@@ -672,35 +562,33 @@ title: Pills
 <<set $stresslvl = 0>>
 Player: ...that's better...
 //i would like to use more lines but i'm not sure how to randomize them (alexandra)
+//me neither ngl, we could just make a few options later (fran)
 //suggestions: maybe this doesn't fully reset the stress but just lowers it?? like by 2 levels or something (alexandra)
-===
-
-title: MonsterLoop3
----
-//what does this even mean (alexandra)
-<<disable_controls "Player">>
-<<set_enabled_in_unity "DIE" true>>
+//mmm, we don't have any code for stress yet, sadly - after we decide what level of stress does what, we could adjust the pills too (fran)
 ===
 
 title: Ending
 ---
 //yeah, this whole thing is getting scrapped (alexandra)
 //EDIT: you are full of bullshit alexandra, we are using this (alexandra)
+//yes (fran) i fixed up the choices a bit
 <<disable_controls "Player">>
 -> Leave
+	Monster: Hm? Leaving already?
+	Monster: You know...most people don't even make it this far.
+	Monster: So why are you giving up all that hard work that got you here?
+	Monster: How will you even survive on your own if you cannot do a simple job?
+	Monster: Do you have any idea how much we invested in you?
+	Monster: How many people would kill to be in your position right now?
+	Monster: hah...I mean, to be frank, I can easily replace you.
+	Monster: bust...
+	Monster: Don't you need this job?
+	Player: I need this job...
 -> Stay
 //jumpscare coroutine in c# (it already exists no worries)
 //i'll implement it later tho, not in this demo (alexandra)
-Monster: Hm? Leaving already?
-Monster: You know...most people don't even make it this far.
-Monster: So why are you giving up all that hard work that got you here?
-Monster: How will you even survive on your own if you cannot do a simple job?
-Monster: Do you have any idea how much we invested in you?
-Monster: How many people would kill to be in your position right now?
-Monster: hah...I mean, to be frank, I can easily replace you.
-Monster: bust...
-Monster: Don't you need this job?
 
-Player: I need this job...
+
+	Player: I need this job...
 //i'll probably add a trigger that would load the credits scene (alexandra)
 ===
