@@ -23,10 +23,6 @@ public class MonsterBehaviour : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
     }
-    void Start()
-    {
-        GoToNextPatrolPoint();
-    }
     void Update()
     {
         if (loopThree.activeInHierarchy)
@@ -51,7 +47,10 @@ public class MonsterBehaviour : MonoBehaviour
         else if (loopFour.activeInHierarchy)
         {
             agent.speed = slowChaseSpeed;
-            Chase();
+            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            {
+                Chase();
+            }
             if (speedToggle.activeInHierarchy)
             {
                 agent.speed = fastChaseSpeed;
@@ -112,6 +111,7 @@ public class MonsterBehaviour : MonoBehaviour
         if (player != null)
         {
             agent.SetDestination(player.position);
+            Debug.Log("Chasing the player");
         }
     }
 }

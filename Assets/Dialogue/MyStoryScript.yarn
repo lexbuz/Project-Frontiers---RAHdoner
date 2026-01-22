@@ -30,9 +30,7 @@ Boss: You know I don't like incompetent employees, right?
 Player: Yes, si-
 
 Boss: That's what I thought. I need you to fetch me file 6G and 9E.
-Boss: Quickly.
-
-DEBUG: we enable the UI note with the case file number 
+Boss: Quickly. 
 
 Player: *sigh*
 Player: Better get to work. 
@@ -41,8 +39,6 @@ Player: Better get to work.
 //end of initial dialogue; enable controls and normal camera
 //add UI tutorial later (alexandra)
 //i'll split the tutorial in two - first for basic controls while the player controls are still locked, then for game logic that's going to be enabled when relevant
-DEBUG: You stand up from the pc, the camera is changed to the normal one now
-DEBUG: ADD tutorial 
 
 <<enable_controls "Player">>
 <<set_enabled_in_unity "TimerCanvas" true>>
@@ -69,9 +65,6 @@ Boss: Don't care. I need files 1T, 9W and 7O. I want them now.
 <<set_enabled_in_unity "Loop2" true>> //enable loop 2 layout
 <<set_enabled_in_unity "TimerCanvas2" false>> //disable the timer i want to get rid off (alexandra)
 
-DEBUG: Here we also enable the UI with the notepad for the files again
-DEBUG: this loop is the sound messing loop, racks are also different a bit
-
 <<set_enabled_in_unity "TimerCanvas3" true>>
 <<enable_controls "Player">>
 //idk which node is supposed to go here next logically :/ i think i'm gonna have to make on myself (alexandra)
@@ -90,7 +83,6 @@ title: Loop3
 <<set_enabled_in_unity "Loop3" true>> //enable loop 3 layout
 <<set_enabled_in_unity "Monster" true>> //enable moster (it's the same one for all loops)
 
-DEBUG: a bit more distortion
 Boss: Files 10R, 3K and 5D. Now.
 Player: *whisper* ...what and asshole.
 
@@ -149,7 +141,6 @@ title: Capsule
 		<<set_enabled_in_unity "TimerCanvas" false>>
 		<<set $files = 0>>
 		//disable all UI here - notepad and file pickup feedback
-		DEBUG: play sound of capsule inserted
 		Player: Finally...
 		DEBUG: play sound of rack falling
 		<<set_enabled_in_unity "RackLoop1" false>> //original rack (alexandra)
