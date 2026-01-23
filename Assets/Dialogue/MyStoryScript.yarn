@@ -21,7 +21,7 @@ Player: ...always the same view...day in, day out...
 Player: ...
 Player: You need this job-
 
-DEBUG: The phone rings and the camera is forced at it
+<<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
 
 Player: Hello-
 Boss: Took you long enough to respond!
@@ -31,10 +31,9 @@ Player: Yes, si-
 
 Boss: That's what I thought. I need you to fetch me file 6G and 9E.
 Boss: Quickly. 
-
+<<set_enabled_in_unity "NoteLoop1" true>> //enable notepad UI for loop 1
 Player: *sigh*
 Player: Better get to work. 
-<<set_enabled_in_unity "NoteLoop1" true>> //enable notepad UI for loop 1
 
 //end of initial dialogue; enable controls and normal camera
 //add UI tutorial later (alexandra)
@@ -135,6 +134,7 @@ title: Capsule
 
 <<if $loop == 1>>
 	<<if $files == 2>>
+		<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 		<<set_enabled_in_unity "NoteLoop1" false>> //disable notepad UI
 		<<set_enabled_in_unity "File1" false>> //disable file pickup feedback
 		<<set_enabled_in_unity "File2" false>> //disable file pickup feedback
@@ -142,7 +142,7 @@ title: Capsule
 		<<set $files = 0>>
 		//disable all UI here - notepad and file pickup feedback
 		Player: Finally...
-		DEBUG: play sound of rack falling
+		<<set_enabled_in_unity "RackFall" true>> // plays sound of the rack falling
 		<<set_enabled_in_unity "RackLoop1" false>> //original rack (alexandra)
 		<<set_enabled_in_unity "RackFallen" true>> //fallen rack (alexandra)
 		Player: !?!
@@ -163,6 +163,8 @@ title: Capsule
 	<<endif>>
 <<elseif $loop == 2>>
 	<<if $files == 3>>
+			<<set_enabled_in_unity "CapsuleInsert" false>> //it won't work without this
+			<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 			<<set_enabled_in_unity "NoteLoop2" false>> //disable notepad UI
 			<<set_enabled_in_unity "File1" false>>
 			<<set_enabled_in_unity "File2" false>>
@@ -170,8 +172,8 @@ title: Capsule
 			<<set_enabled_in_unity "TimerCanvas3" false>>
 			<<set $files = 0>>
 			Player: Perfect...
-			DEBUG: play sound for the file being inserted into the capsule
-			DEBUG: the phone should ring distantly now
+			<<set_enabled_in_unity "PhoneRing" false>> //it won't work without this
+			<<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
 			DEBUG: it should sound WRONG
 			Player: Alright, time to go back.
 			<<set_enabled_in_unity "TimerCanvas4" true>>
@@ -190,14 +192,16 @@ title: Capsule
 	//logically, move to Loop3 node next
 <<elseif $loop == 3>>
 	<<if $files == 3>>
+		<<set_enabled_in_unity "CapsuleInsert" false>> //it won't work without this
+		<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 		<<set_enabled_in_unity "NoteLoop3" false>> //disable notepad UI
 		<<set_enabled_in_unity "File1" false>>
 		<<set_enabled_in_unity "File2" false>>
 		<<set_enabled_in_unity "File3" false>>
 		<<set_enabled_in_unity "TimerCanvas5" false>>
 		<<set $files = 0>>
-		DEBUG: play sound of inserting capsule 
-		DEBUG: the phone should ring and sound even worse now
+		<<set_enabled_in_unity "PhoneRing" false>> //it won't work without this
+		<<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
 		Player: I better get back to the office...
 		<<set_enabled_in_unity "TimerCanvas6" true>>
 		<<set_enabled_in_unity "Loop4Start" true>>
@@ -214,6 +218,8 @@ title: Capsule
 	//logically, move to Loop4 node next
 <<elseif $loop == 4>>
 	<<if $files == 3>>
+		<<set_enabled_in_unity "CapsuleInsert" false>> //it won't work without this
+		<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 		<<set_enabled_in_unity "NoteLoop4" false>> //disable notepad UI
 		<<set_enabled_in_unity "File1" false>>
 		<<set_enabled_in_unity "File2" false>>
@@ -226,7 +232,6 @@ title: Capsule
 		<<set_enabled_in_unity "MonsterLoop4Chase" true>> //this doesn't even exist in unity (alexandra)
 		<<set_enabled_in_unity "SpeedToggle" true>>
 		<<set $files = 0>>
-		DEBUG: play sound of inserting capsule 
 		<<set_enabled_in_unity "MonsterLookChase" true>> //this does exist but i'm not sure what it does (alexandra)
 		//ok so basically it plays a node that doesn't exist (alexandra)
 		//no probs, we're not using it anyway (alexandra)
@@ -258,8 +263,8 @@ title: RingOfficeBack1
 Player: ...weird.
 Player: There is no wind in here for it to tip over like that-
 
-DEBUG: The phone starts ringing again from the distance, 
-DEBUG: it makes the player want to get back to the office
+<<set_enabled_in_unity "PhoneRing" false>> //it won't work without this
+<<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
 
 Player: ...whatever. Shouldn't make him wait.
 
@@ -280,6 +285,8 @@ title: ArchiveShelf11
 //i'm not sure why the player controls have to be disabled here?? (alexandra)
 <<if $loop == 1>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File1.1" false>>
 	<<set_enabled_in_unity "File1" true>>
 	//will also enable UI feedback for picking up the file
@@ -301,6 +308,8 @@ title: ArchiveShelf12
 <<disable_controls "Player">>
 <<if $loop == 1>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File1.2" false>>
 	<<set_enabled_in_unity "File2" true>>
 	//will also enable UI feedback for picking up the file
@@ -320,6 +329,8 @@ title: ArchiveShelf21
 <<disable_controls "Player">>
 <<if $loop == 2>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File2.1" false>>
 	<<set_enabled_in_unity "File1" true>>
 	//will also enable UI feedback for picking up the file
@@ -341,6 +352,8 @@ title: ArchiveShelf22
 <<disable_controls "Player">>
 <<if $loop == 2>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File2.2" false>>
 	<<set_enabled_in_unity "File2" true>>
 	//will also enable UI feedback for picking up the file
@@ -362,6 +375,8 @@ title: ArchiveShelf23
 <<disable_controls "Player">>
 <<if $loop == 2>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File2.3" false>>
 	<<set_enabled_in_unity "File3" true>>
 	//will also enable UI feedback for picking up the file
@@ -383,6 +398,8 @@ title: ArchiveShelf31
 <<disable_controls "Player">>
 <<if $loop == 3>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File3.1" false>>
 	<<set_enabled_in_unity "File1" true>>
 	//will also enable UI feedback for picking up the file
@@ -404,6 +421,8 @@ title: ArchiveShelf32
 <<disable_controls "Player">>
 <<if $loop == 3>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File3.2" false>>
 	<<set_enabled_in_unity "File2" true>>
 	//will also enable UI feedback for picking up the file
@@ -425,6 +444,8 @@ title: ArchiveShelf33
 <<disable_controls "Player">>
 <<if $loop == 3>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File3.3" false>>
 	<<set_enabled_in_unity "File3" true>>
 	//will also enable UI feedback for picking up the file
@@ -446,6 +467,8 @@ title: ArchiveShelf41
 <<disable_controls "Player">>
 <<if $loop == 4>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File4.1" false>>
 	<<set_enabled_in_unity "File1" true>>
 	//will also enable UI feedback for picking up the file
@@ -467,6 +490,8 @@ title: ArchiveShelf42
 <<disable_controls "Player">>
 <<if $loop == 4>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File4.2" false>>
 	<<set_enabled_in_unity "File2" true>>
 	//will also enable UI feedback for picking up the file
@@ -488,6 +513,8 @@ title: ArchiveShelf43
 <<disable_controls "Player">>
 <<if $loop == 4>>
 	<<set $files = $files + 1>>
+	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
+	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
 	<<set_enabled_in_unity "File4.3" false>>
 	<<set_enabled_in_unity "File3" true>>
 	//will also enable UI feedback for picking up the file
@@ -549,7 +576,7 @@ title: DecoyShelf
 
 title: Pills
 ---
-
+<<set_enabled_in_unity "PillShake" true>> // plays sound of the pills shaking
 <<set $stresslvl = 0>>
 Player: ...that's better...
 //i would like to use more lines but i'm not sure how to randomize them (alexandra)
