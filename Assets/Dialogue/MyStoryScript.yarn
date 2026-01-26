@@ -260,8 +260,8 @@ title: ArchiveShelf11
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File1.1" false>>
-	<<set_enabled_in_unity "File1" true>>
+	<<set_enabled_in_unity "File.9E" false>>
+	<<set_enabled_in_unity "9E" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: Just one more...
@@ -282,8 +282,8 @@ title: ArchiveShelf12
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File1.2" false>>
-	<<set_enabled_in_unity "File2" true>>
+	<<set_enabled_in_unity "File.6G" false>>
+	<<set_enabled_in_unity "6G" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: Just one more...
@@ -302,8 +302,8 @@ title: ArchiveShelf21
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File2.1" false>>
-	<<set_enabled_in_unity "File1" true>>
+	<<set_enabled_in_unity "File.9W" false>>
+	<<set_enabled_in_unity "9W" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -324,8 +324,8 @@ title: ArchiveShelf22
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File2.2" false>>
-	<<set_enabled_in_unity "File2" true>>
+	<<set_enabled_in_unity "File.7O" false>>
+	<<set_enabled_in_unity "7O" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -346,8 +346,8 @@ title: ArchiveShelf23
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File2.3" false>>
-	<<set_enabled_in_unity "File3" true>>
+	<<set_enabled_in_unity "File.1T" false>>
+	<<set_enabled_in_unity "1T" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -368,8 +368,8 @@ title: ArchiveShelf31
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File3.1" false>>
-	<<set_enabled_in_unity "File1" true>>
+	<<set_enabled_in_unity "File.10R" false>>
+	<<set_enabled_in_unity "10R" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -390,8 +390,8 @@ title: ArchiveShelf32
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File3.2" false>>
-	<<set_enabled_in_unity "File2" true>>
+	<<set_enabled_in_unity "File.3K" false>>
+	<<set_enabled_in_unity "3K" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -412,8 +412,8 @@ title: ArchiveShelf33
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File3.3" false>>
-	<<set_enabled_in_unity "File3" true>>
+	<<set_enabled_in_unity "File.5D" false>>
+	<<set_enabled_in_unity "5D" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -434,8 +434,8 @@ title: ArchiveShelf41
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File4.1" false>>
-	<<set_enabled_in_unity "File1" true>>
+	<<set_enabled_in_unity "File.2O" false>>
+	<<set_enabled_in_unity "2O" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -456,8 +456,8 @@ title: ArchiveShelf42
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File4.2" false>>
-	<<set_enabled_in_unity "File2" true>>
+	<<set_enabled_in_unity "File.13N" false>>
+	<<set_enabled_in_unity "13N" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
@@ -478,8 +478,8 @@ title: ArchiveShelf43
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
 	<<set_enabled_in_unity "FilePickUp" true>> // plays sound of the file
-	<<set_enabled_in_unity "File4.3" false>>
-	<<set_enabled_in_unity "File3" true>>
+	<<set_enabled_in_unity "File.3E" false>>
+	<<set_enabled_in_unity "3E" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
 		Player: There it is...
