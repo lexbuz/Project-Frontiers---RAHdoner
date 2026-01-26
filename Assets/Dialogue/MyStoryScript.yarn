@@ -15,14 +15,15 @@
 //Start loop one; player is sitting at the computer with controls disabled; initial dialogue
 <<disable_controls "Player">>
 
-DEBUG: The player is sitting at the computer (forced camera)
-
 Player: ...always the same view...day in, day out...
 Player: ...
 Player: You need this job-
 
 <<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
-
+Player: Ugh...
+Player: I was hoping he wouldn't bother me today. // this line exists so players actually listen to the phone ring
+<<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
+Player: ... // this line is here so that the pickup phone doesnt play AS he is saying "Hello"
 Player: Hello-
 Boss: Took you long enough to respond!
 Boss: You know I don't like incompetent employees, right?
@@ -31,6 +32,8 @@ Player: Yes, si-
 
 Boss: That's what I thought. I need you to fetch me file 6G and 9E.
 Boss: Quickly. 
+
+<<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 <<set_enabled_in_unity "NoteLoop1" true>> //enable notepad UI for loop 1
 Player: *sigh*
 Player: Better get to work. 
@@ -48,21 +51,23 @@ title: Loop2
 ---
 //loop 2 dialogue - you should know the drill by now
 <<disable_controls "Player">>
-
+Player: What now?
+<<set_enabled_in_unity "PhonePickUp" false>> 
+<<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 Boss:  Starting to think you're down there wanking or something.
 Boss: How many times do I have to tell you to pick up that phone right away?!
 
 Player: I-
 
 Boss: Don't care. I need files 1T, 9W and 7O. I want them now.
-
+<<set_enabled_in_unity "PhoneHangUp" false>>
+<<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 <<set_enabled_in_unity "NoteLoop2" true>> //enable notepad UI for loop 2
 
 <<set $loop = 2>>
 <<set_enabled_in_unity "Loop2Start" false>> //disable dialogue trigger
 <<set_enabled_in_unity "Loop1" false>> //disable loop 1 layout
 <<set_enabled_in_unity "Loop2" true>> //enable loop 2 layout
-<<set_enabled_in_unity "TimerCanvas2" false>> //disable the timer i want to get rid off (alexandra)
 
 <<set_enabled_in_unity "TimerCanvas3" true>>
 <<enable_controls "Player">>
@@ -76,15 +81,17 @@ title: Loop3
 <<disable_controls "Player">>
 
 <<set $loop = 3>>
-<<set_enabled_in_unity "TimerCanvas4" false>> //disable my mortal enemy the timer (alexandra)
 <<set_enabled_in_unity "Loop3Start" true>> //enable loop 3 trigger
 <<set_enabled_in_unity "Loop2" false>> //disable loop 2 layout
 <<set_enabled_in_unity "Loop3" true>> //enable loop 3 layout
 <<set_enabled_in_unity "Monster" true>> //enable moster (it's the same one for all loops)
-
+Player: Phew... 
+<<set_enabled_in_unity "PhonePickUp" false>> 
+<<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 Boss: Files 10R, 3K and 5D. Now.
+<<set_enabled_in_unity "PhoneHangUp" false>>
+<<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 Player: *whisper* ...what and asshole.
-
 <<set_enabled_in_unity "NoteLoop3" true>> //enable notepad UI for loop 3
 
 <<set_enabled_in_unity "TimerCanvas5" true>> //enable timer for loop 3
@@ -98,40 +105,25 @@ title:Loop4
 <<disable_controls "Player">>
 
 <<set $loop = 4>>
-<<set_enabled_in_unity "TimerCanvas6" false>> //disable timer boooo (alexandra)
 <<set_enabled_in_unity "Loop4Start" true>> //enable loop 4 trigger
 <<set_enabled_in_unity "Loop3" false>> //disable loop 3 layout
 <<set_enabled_in_unity "Loop4" true>> //enable loop 4 layout
-
+Player: ...
+<<set_enabled_in_unity "PhonePickUp" false>> 
+<<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 Boss: Files 2O, 13N, 3E. Quick.
+<<set_enabled_in_unity "PhoneHangUp" false>>
+<<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 Player: ...
 
 <<set_enabled_in_unity "NoteLoop4" true>> //enable notepad UI for loop 4
 
-<<set_enabled_in_unity "MonsterLook4" true>> //tf is monsterlook4 (alexandra)
-//EDIT: it's something that we def don't need anymore (alexandra)
-
 <<enable_controls "Player">>
 ===
 
-title: Loop4Monster
----
-//we also don't need this?? (alexandra)
-//i don't think camera work is gonna be implemented in yarn (alexandra)
-//but even if it was, i don't think it needs a separete node (alexandra)
-//this script is too long anyway (alexandra)
-<<disable_controls "Player">>
-
-DEBUG: camera is forced to look at Monster, he now walks after player
-<<set_enabled_in_unity "TimerCanvas7" true>>
-<<enable_controls "Player">>
-===
 title: Capsule
 ---
 <<disable_controls "Player">>
-//again?? not sure why disabling controls is necessary here (alexandra)
-//so they dont walk off DURING dialogue, stuff might still be happening (fran)
-
 <<if $loop == 1>>
 	<<if $files == 2>>
 		<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
@@ -152,8 +144,7 @@ title: Capsule
 	<<else>>
 		Player: I don’t have the files yet, I should go get them.
 		<<set $stresslvl = $stresslvl + 1>>
-		<<if $stressTutorial == false>> //i think it's better if we show the tutorial only once so i made boolean that checks that (alexandra)
-		// i agree with this, let's do it... the issue is that we dont know WHEN the player makes the mistake, so i would add this boolean anytime there is a mistake (we could also do a separate stress node into which the yarnspinner will jump - so we dont have to copypaste it everywhere) (fran)
+		<<if $stressTutorial == false>> 
 			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
 			<<set $stressTutorial = true>>
 		<<endif>>
@@ -172,11 +163,8 @@ title: Capsule
 			<<set_enabled_in_unity "TimerCanvas3" false>>
 			<<set $files = 0>>
 			Player: Perfect...
-			<<set_enabled_in_unity "PhoneRing" false>> //it won't work without this
-			<<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
-			DEBUG: it should sound WRONG
+			<<set_enabled_in_unity "PhoneRingLoop3" true>> // plays sound of the phone, it sounds OFF
 			Player: Alright, time to go back.
-			<<set_enabled_in_unity "TimerCanvas4" true>>
 			<<set_enabled_in_unity "Loop3Start" true>>
 	<<else>> //personal opinion: i wouldn't repeat the stress tutorial everytime this mistake happens (alexandra)
 			// the tutorial happens only if the stress level is 2... but good point, cuz we can actually now RESTORE our sanity (fran), i think we can do ONe stress tutorial and delete the rest
@@ -200,10 +188,8 @@ title: Capsule
 		<<set_enabled_in_unity "File3" false>>
 		<<set_enabled_in_unity "TimerCanvas5" false>>
 		<<set $files = 0>>
-		<<set_enabled_in_unity "PhoneRing" false>> //it won't work without this
-		<<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
+		<<set_enabled_in_unity "PhoneRingLoop4" true>> // plays sound of the phone that is even worse
 		Player: I better get back to the office...
-		<<set_enabled_in_unity "TimerCanvas6" true>>
 		<<set_enabled_in_unity "Loop4Start" true>>
 	<<else>> //personal opinion: same here about the stress tutorial (alexandra)
 		Player: I don’t have all the files yet, I should go get them.
@@ -224,17 +210,12 @@ title: Capsule
 		<<set_enabled_in_unity "File1" false>>
 		<<set_enabled_in_unity "File2" false>>
 		<<set_enabled_in_unity "File3" false>>
-		<<set_enabled_in_unity "TimerCanvas7" false>> //disable timer >:( (alexandra)
-		<<set_enabled_in_unity "MonsterLoop4" false>> //get this out of my sight (alexandra)
+		<<set_enabled_in_unity "TimerCanvas7" false>> //disable timer >:( (alexandra) // that is a diff one (fran)
 		<<set_enabled_in_unity "Loop4" false>> //disable loop 4 layout
 		<<set_enabled_in_unity "main" false>> //disable main layout
 		<<set_enabled_in_unity "Loop4chase" true>> //enable chase layout
-		<<set_enabled_in_unity "MonsterLoop4Chase" true>> //this doesn't even exist in unity (alexandra)
 		<<set_enabled_in_unity "SpeedToggle" true>>
 		<<set $files = 0>>
-		<<set_enabled_in_unity "MonsterLookChase" true>> //this does exist but i'm not sure what it does (alexandra)
-		//ok so basically it plays a node that doesn't exist (alexandra)
-		//no probs, we're not using it anyway (alexandra)
 		<<set_enabled_in_unity "ENDING" true>> //enable ending trigger
 		Player: ...Offi- office... I need to get to the office-
 		//logically, move to Ending node next
@@ -249,27 +230,19 @@ title: Capsule
 			<<endif>>
 	<<endif>>
 <<endif>>
-
 <<enable_controls "Player">>
 ===
 
 title: RingOfficeBack1
 ---
-//are we going to need more of these?? (alexandra)
-//probably not, there's no more dialogue, just ringing sounds (alexandra)
-//idk (alexandra)
 <<disable_controls "Player">>
 
 Player: ...weird.
-Player: There is no wind in here for it to tip over like that-
-
 <<set_enabled_in_unity "PhoneRing" false>> //it won't work without this
 <<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
-
+Player: There is no wind in here for it to tip over like that-
 Player: ...whatever. Shouldn't make him wait.
 
-<<set_enabled_in_unity "TimerCanvas2" true>>
-//personal opinion: we can get rid of the timer, it feels weird to have the possibility of death bc you did not reach the office in time (alexandra)
 <<set_enabled_in_unity "RingOfficeBack1" false>>
 <<set_enabled_in_unity "Loop2Start" true>> //triggers loop 2 - calls on loop2 node
 
@@ -294,7 +267,6 @@ title: ArchiveShelf11
 		Player: Just one more...
 	<<elseif $files == 2>>
 		Player: That should be all.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -317,7 +289,6 @@ title: ArchiveShelf12
 		Player: Just one more...
 	<<elseif $files == 2>>
 		Player: That should be all.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -340,7 +311,6 @@ title: ArchiveShelf21
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -363,7 +333,6 @@ title: ArchiveShelf22
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -386,7 +355,6 @@ title: ArchiveShelf23
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -409,7 +377,6 @@ title: ArchiveShelf31
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -432,7 +399,6 @@ title: ArchiveShelf32
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -455,7 +421,6 @@ title: ArchiveShelf33
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -478,7 +443,6 @@ title: ArchiveShelf41
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -501,7 +465,6 @@ title: ArchiveShelf42
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -524,7 +487,6 @@ title: ArchiveShelf43
 		Player: Just one more...
 	<<elseif $files == 3>>
 		Player: That should be all. Capsule room now.
-		DEBUG: disable notepad ui
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -533,8 +495,6 @@ title: ArchiveShelf43
 
 title: LoopTrigger
 ---
-//i would just reuse this node for all loop reactions
-//i love this idea, actually (fran)
 <<disable_controls "Player">>
 <<if $loop == 2>>
 	Player: Why am I seeing things again...
@@ -558,11 +518,7 @@ title: LoopTrigger
 ===
 title: DecoyShelf
 ---
-//HUH??????? (alexandra)
-//WHAT HAPPENED IN THIS SCRIPT (alexandra)
-//i'm ab to kms not even kidding (alexandra)
-//now in all seriousness, this code already happens in every archiveshelf node, i'm not sure what's the purpose of this or if the other nodes were simply not updated (alexandra)
-// the other nodes... i am stupid. this already does the job, cleaning up the other nodes makes sense. (fran)
+
 <<set $stresslvl = $stresslvl + 1>>
 	<<if $stressTutorial == false>>
 		TUTORIAL: explaining how stress and mistakes work (idk if we need this)
@@ -589,7 +545,6 @@ title: Ending
 ---
 //yeah, this whole thing is getting scrapped (alexandra)
 //EDIT: you are full of bullshit alexandra, we are using this (alexandra)
-//yes (fran) i fixed up the choices a bit
 <<disable_controls "Player">>
 -> Leave
 	Monster: Hm? Leaving already?
