@@ -128,8 +128,8 @@ title: Capsule
 	<<if $files == 2>>
 		<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 		<<set_enabled_in_unity "NoteLoop1" false>> //disable notepad UI
-		<<set_enabled_in_unity "File1" false>> //disable file pickup feedback
-		<<set_enabled_in_unity "File2" false>> //disable file pickup feedback
+		<<set_enabled_in_unity "6G" false>> //disable file pickup feedback
+		<<set_enabled_in_unity "9E" false>> //disable file pickup feedback
 		<<set_enabled_in_unity "TimerCanvas" false>>
 		<<set $files = 0>>
 		//disable all UI here - notepad and file pickup feedback
@@ -157,9 +157,9 @@ title: Capsule
 			<<set_enabled_in_unity "CapsuleInsert" false>> //it won't work without this
 			<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 			<<set_enabled_in_unity "NoteLoop2" false>> //disable notepad UI
-			<<set_enabled_in_unity "File1" false>>
-			<<set_enabled_in_unity "File2" false>>
-			<<set_enabled_in_unity "File3" false>>
+			<<set_enabled_in_unity "7O" false>>
+			<<set_enabled_in_unity "9W" false>>
+			<<set_enabled_in_unity "1T" false>>
 			<<set_enabled_in_unity "TimerCanvas3" false>>
 			<<set $files = 0>>
 			Player: Perfect...
@@ -183,9 +183,9 @@ title: Capsule
 		<<set_enabled_in_unity "CapsuleInsert" false>> //it won't work without this
 		<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 		<<set_enabled_in_unity "NoteLoop3" false>> //disable notepad UI
-		<<set_enabled_in_unity "File1" false>>
-		<<set_enabled_in_unity "File2" false>>
-		<<set_enabled_in_unity "File3" false>>
+		<<set_enabled_in_unity "5D" false>>
+		<<set_enabled_in_unity "3K" false>>
+		<<set_enabled_in_unity "10R" false>>
 		<<set_enabled_in_unity "TimerCanvas5" false>>
 		<<set $files = 0>>
 		<<set_enabled_in_unity "PhoneRingLoop4" true>> // plays sound of the phone that is even worse
@@ -207,17 +207,17 @@ title: Capsule
 		<<set_enabled_in_unity "CapsuleInsert" false>> //it won't work without this
 		<<set_enabled_in_unity "CapsuleInsert" true>> // plays sound of the capsule being inserted
 		<<set_enabled_in_unity "NoteLoop4" false>> //disable notepad UI
-		<<set_enabled_in_unity "File1" false>>
-		<<set_enabled_in_unity "File2" false>>
-		<<set_enabled_in_unity "File3" false>>
+		<<set_enabled_in_unity "3E" false>>
+		<<set_enabled_in_unity "13N" false>>
+		<<set_enabled_in_unity "2O" false>>
 		<<set_enabled_in_unity "TimerCanvas7" false>> //disable timer >:( (alexandra) // that is a diff one (fran)
 		<<set_enabled_in_unity "Loop4" false>> //disable loop 4 layout
 		<<set_enabled_in_unity "main" false>> //disable main layout
 		<<set_enabled_in_unity "Loop4chase" true>> //enable chase layout
-		<<set_enabled_in_unity "SpeedToggle" true>>
 		<<set $files = 0>>
 		<<set_enabled_in_unity "ENDING" true>> //enable ending trigger
 		Player: ...Offi- office... I need to get to the office-
+		<<set_enabled_in_unity "SpeedToggle" true>> //enable speed toggle for chase
 		//logically, move to Ending node next
 	<<else>>
 		YOU: I don’t have all the files yet, I should go get them.

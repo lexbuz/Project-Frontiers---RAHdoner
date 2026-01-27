@@ -8,6 +8,7 @@ public class Respawn : MonoBehaviour
     [SerializeField] private GameObject deathScreen;
     public Transform player;
     public NavMeshAgent monsterAgent;
+    
     public void PlayerRespawn()
     {
         player.position = spawnPoint.position;

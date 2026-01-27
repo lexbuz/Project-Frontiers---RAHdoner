@@ -11,6 +11,7 @@ public class MonsterBehaviour : MonoBehaviour
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject loopThree;
     [SerializeField] private GameObject loopFour;
+    [SerializeField] private GameObject loopFourChase;
     [SerializeField] private GameObject speedToggle;
     public float slowChaseSpeed;
     public float fastChaseSpeed;
@@ -44,16 +45,16 @@ public class MonsterBehaviour : MonoBehaviour
                 }
             }
         }
-        else if (loopFour.activeInHierarchy)
+        else if (loopFour.activeInHierarchy || loopFourChase.activeInHierarchy)
         {
             agent.speed = slowChaseSpeed;
             if (!agent.pathPending && agent.remainingDistance < 0.5f)
             {
                 Chase();
-            }
-            if (speedToggle.activeInHierarchy)
-            {
+                if (speedToggle.activeInHierarchy)
+                {
                 agent.speed = fastChaseSpeed;
+                }
             }
             if (player != null)
             {
