@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8965195217622859279}
   - component: {fileID: 8875008137266437528}
   - component: {fileID: 2493718442878461292}
+  - component: {fileID: 2553256834034857508}
   m_Layer: 0
   m_Name: box_halfopen
   m_TagString: Untagged
@@ -86,3 +87,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2553256834034857508
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828130045857697900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 63.1893, y: 60.88383, z: 43.746456}
+  m_Center: {x: 0.000011444092, y: -0.031856537, z: -0.0000019073486}

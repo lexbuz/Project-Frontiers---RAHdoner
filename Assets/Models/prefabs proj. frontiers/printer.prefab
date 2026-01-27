@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7230663407730977344}
   - component: {fileID: 2192380456074202759}
   - component: {fileID: 2260898904177197141}
+  - component: {fileID: -1992010605955633534}
   m_Layer: 0
   m_Name: printer
   m_TagString: Untagged
@@ -86,3 +87,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-1992010605955633534
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2819150171763723788}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 69.7263, y: 33.39264, z: 54.242443}
+  m_Center: {x: -0.000011444092, y: -0.103782654, z: 0}
