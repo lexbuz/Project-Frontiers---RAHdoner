@@ -15,16 +15,16 @@ title: Loop1
 //Start loop one; player is sitting at the computer with controls disabled; initial dialogue
 <<disable_controls "Player">>
 
-Player: ...always the same view...day in, day out...
-Player: ...
-Player: You need this job-
+You: ...always the same view...day in, day out...
+You: ...
+You: You need this job-
 
 <<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
-Player: Ugh...
-Player: I was hoping he wouldn't bother me today. // this line exists so players actually listen to the phone ring
+You: Ugh...
+You: I was hoping he wouldn't bother me today. // this line exists so players actually listen to the phone ring
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
-Player: ... // this line is here so that the pickup phone doesnt play AS he is saying "Hello"
-Player: Hello-
+You: ... // this line is here so that the pickup phone doesnt play AS he is saying "Hello"
+You: Hello-
 
 <<set_enabled_in_unity "Boss1part1" true>>
 Boss: Took you long enough to respond! 
@@ -33,7 +33,7 @@ Boss: Took you long enough to respond!
 Boss: You know I don't like incompetent employees, right?
 <<wait  0.5>>
 
-Player: Yes, si-
+You: Yes, si-
 <<set_enabled_in_unity "Boss2" true>>
 Boss: That's what I thought. I need you to fetch me file 6G and 9E.
 <<wait  3>>
@@ -41,8 +41,8 @@ Boss: That's what I thought. I need you to fetch me file 6G and 9E.
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 <<set_enabled_in_unity "NoteLoop1" true>> //enable notepad UI for loop 1
-Player: *sigh*
-Player: Better get to work. 
+You: *sigh*
+You: Better get to work. 
 
 //end of initial dialogue; enable controls and normal camera
 //add UI tutorial later (alexandra)
@@ -57,7 +57,7 @@ title: Loop2
 ---
 //loop 2 dialogue - you should know the drill by now
 <<disable_controls "Player">>
-Player: What now?
+You: What now?
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 
@@ -66,7 +66,7 @@ Boss:  Starting to think you're down there wanking or something.
 <<set_enabled_in_unity "Boss3part2">>
 Boss: How many times do I have to tell you to pick up that phone right away?!
 
-Player: I-
+You: I-
 
 <<set_enabled_in_unity "Boss4">>
 Boss: Don't care. I need files 1T, 9W and 7O. I want them now.
@@ -97,7 +97,7 @@ title: Loop3
 <<set_enabled_in_unity "Loop2" false>> //disable loop 2 layout
 <<set_enabled_in_unity "Loop3" true>> //enable loop 3 layout
 <<set_enabled_in_unity "Monster" true>> //enable moster (it's the same one for all loops)
-Player: Phew... 
+You: Phew... 
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 
@@ -107,7 +107,7 @@ Boss: Files 10R, 3K and 5D. Now.
 
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
-Player: *whisper* ...what and asshole.
+You: *whisper* ...what and asshole.
 <<set_enabled_in_unity "NoteLoop3" true>> //enable notepad UI for loop 3
 
 <<set_enabled_in_unity "TimerCanvas5" true>> //enable timer for loop 3
@@ -124,17 +124,17 @@ title:Loop4
 <<set_enabled_in_unity "Loop4Start" true>> //enable loop 4 trigger
 <<set_enabled_in_unity "Loop3" false>> //disable loop 3 layout
 <<set_enabled_in_unity "Loop4" true>> //enable loop 4 layout
-Player: ...
+You: ...
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 
 <<set_enabled_in_unity "Boss6">>
 Boss: Files 2O, 13N, 3E. Move your ass.
-<<wait  6>>
+<<wait  >>
 
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
-Player: ...
+You: ...
 
 <<set_enabled_in_unity "NoteLoop4" true>> //enable notepad UI for loop 4
 
@@ -153,16 +153,16 @@ title: Capsule
 		<<set_enabled_in_unity "TimerCanvas" false>>
 		<<set $files = 0>>
 		//disable all UI here - notepad and file pickup feedback
-		Player: Finally...
+		You: Finally...
 		<<set_enabled_in_unity "RackFall" true>> // plays sound of the rack falling
 		<<set_enabled_in_unity "RackLoop1" false>> //original rack (alexandra)
 		<<set_enabled_in_unity "RackFallen" true>> //fallen rack (alexandra)
-		Player: !?!
-		Player: What the-?!
+		You: !?!
+		You: What the-?!
 		<<set_enabled_in_unity "RingOfficeBack1" true>> //trigger that's going to call the player back to the office
 		//logically, move to RingOfficeBack1 node next
 	<<else>>
-		Player: I don’t have the files yet, I should go get them.
+		You: I don’t have the files yet, I should go get them.
 		<<set $stresslvl = $stresslvl + 1>>
 		<<if $stressTutorial == false>> 
 			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
@@ -182,13 +182,13 @@ title: Capsule
 			<<set_enabled_in_unity "1T" false>>
 			<<set_enabled_in_unity "TimerCanvas3" false>>
 			<<set $files = 0>>
-			Player: Perfect...
+			You: Perfect...
 			<<set_enabled_in_unity "PhoneRingLoop3" true>> // plays sound of the phone, it sounds OFF
-			Player: Alright, time to go back.
+			You: Alright, time to go back.
 			<<set_enabled_in_unity "Loop3Start" true>>
 	<<else>> //personal opinion: i wouldn't repeat the stress tutorial everytime this mistake happens (alexandra)
 			// the tutorial happens only if the stress level is 2... but good point, cuz we can actually now RESTORE our sanity (fran), i think we can do ONe stress tutorial and delete the rest
-		Player: I don’t have all the files yet, I should go get them.
+		You: I don’t have all the files yet, I should go get them.
 			<<set $stresslvl = $stresslvl + 1>>
 			<<if $stresslvl == 2>>
 				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
@@ -209,10 +209,10 @@ title: Capsule
 		<<set_enabled_in_unity "TimerCanvas5" false>>
 		<<set $files = 0>>
 		<<set_enabled_in_unity "PhoneRingLoop4" true>> // plays sound of the phone that is even worse
-		Player: I better get back to the office...
+		You: I better get back to the office...
 		<<set_enabled_in_unity "Loop4Start" true>>
 	<<else>> //personal opinion: same here about the stress tutorial (alexandra)
-		Player: I don’t have all the files yet, I should go get them.
+		You: I don’t have all the files yet, I should go get them.
 			<<set $stresslvl = $stresslvl + 1>>
 			<<if $stresslvl == 2>>
 				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
@@ -236,11 +236,11 @@ title: Capsule
 		<<set_enabled_in_unity "Loop4chase" true>> //enable chase layout
 		<<set $files = 0>>
 		<<set_enabled_in_unity "ENDING" true>> //enable ending trigger
-		Player: ...Offi- office... I need to get to the office-
+		You: ...Offi- office... I need to get to the office-
 		<<set_enabled_in_unity "SpeedToggle" true>> //enable speed toggle for chase
 		//logically, move to Ending node next
 	<<else>>
-		YOU: I don’t have all the files yet, I should go get them.
+		You: I don’t have all the files yet, I should go get them.
 			<<set $stresslvl = $stresslvl + 1>>
 			<<if $stresslvl == 2>>
 				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
@@ -257,11 +257,11 @@ title: RingOfficeBack1
 ---
 <<disable_controls "Player">>
 
-Player: ...weird.
+You: ...weird.
 <<set_enabled_in_unity "PhoneRing" false>> //it won't work without this
 <<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
-Player: There is no wind in here for it to tip over like that-
-Player: ...whatever. Shouldn't make him wait.
+You: There is no wind in here for it to tip over like that-
+You: ...whatever. Shouldn't make him wait.
 
 <<set_enabled_in_unity "RingOfficeBack1" false>>
 <<set_enabled_in_unity "Loop2Start" true>> //triggers loop 2 - calls on loop2 node
@@ -284,9 +284,9 @@ title: ArchiveShelf11
 	<<set_enabled_in_unity "9E" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 2>>
-		Player: That should be all.
+		You: That should be all.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -306,9 +306,9 @@ title: ArchiveShelf12
 	<<set_enabled_in_unity "6G" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 2>>
-		Player: That should be all.
+		You: That should be all.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -326,11 +326,11 @@ title: ArchiveShelf21
 	<<set_enabled_in_unity "9W" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -348,11 +348,11 @@ title: ArchiveShelf22
 	<<set_enabled_in_unity "7O" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -370,11 +370,11 @@ title: ArchiveShelf23
 	<<set_enabled_in_unity "1T" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -392,11 +392,11 @@ title: ArchiveShelf31
 	<<set_enabled_in_unity "10R" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -414,11 +414,11 @@ title: ArchiveShelf32
 	<<set_enabled_in_unity "3K" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -436,11 +436,11 @@ title: ArchiveShelf33
 	<<set_enabled_in_unity "5D" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -458,11 +458,11 @@ title: ArchiveShelf41
 	<<set_enabled_in_unity "2O" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -480,11 +480,11 @@ title: ArchiveShelf42
 	<<set_enabled_in_unity "13N" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -502,11 +502,11 @@ title: ArchiveShelf43
 	<<set_enabled_in_unity "3E" true>>
 	//will also enable UI feedback for picking up the file
 	<<if $files == 1>>
-		Player: There it is...
+		You: There it is...
 	<<elseif $files == 2>>
-		Player: Just one more...
+		You: Just one more...
 	<<elseif $files == 3>>
-		Player: That should be all. Capsule room now.
+		You: That should be all. Capsule room now.
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -517,17 +517,17 @@ title: LoopTrigger
 ---
 <<disable_controls "Player">>
 <<if $loop == 2>>
-	Player: Why am I seeing things again...
+	You: Why am I seeing things again...
 <<endif>>
 //logically, move to ArchiveShelf21 node next
 <<if $loop == 3>>
-	Player: Were they always like that...?
+	You: Were they always like that...?
 <<endif>>
 //logically, move to ArchiveShelf31 node next
 //there are some alternative lines in the doc, i'm just gonna leave this here for now (alexandra)
 <<if $loop == 4>>
 	DEBUG:camera focuses on the monster (damla we love you <3)
-	Player: ...I need to get the files...(keeps repeating this a few times while running around)
+	You: ...I need to get the files...(keeps repeating this a few times while running around)
 	//now there are 2 ways i can do this (alexandra)
 	//i can just repeat the line of code with a "wait 2 seconds" command in between a few times
 	//or i can do it in c# with a coroutine that makes the player say the line every few seconds while in the loop
@@ -554,7 +554,7 @@ title: Pills
 ---
 <<set_enabled_in_unity "PillShake" true>> // plays sound of the pills shaking
 <<set $stresslvl = 0>>
-Player: ...that's better...
+You: ...that's better...
 //i would like to use more lines but i'm not sure how to randomize them (alexandra)
 //me neither ngl, we could just make a few options later (fran)
 //suggestions: maybe this doesn't fully reset the stress but just lowers it?? like by 2 levels or something (alexandra)
@@ -574,14 +574,14 @@ title: Ending
 	Monster: Do you have any idea how much we invested in you?
 	Monster: How many people would kill to be in your position right now?
 	Monster: hah...I mean, to be frank, I can easily replace you.
-	Monster: bust...
+	Monster: but...
 	Monster: Don't you need this job?
-	Player: I need this job...
+	You: I need this job...
 -> Stay
 //jumpscare coroutine in c# (it already exists no worries)
 //i'll implement it later tho, not in this demo (alexandra)
 
 
-	Player: I need this job...
+	You: I need this job...
 //i'll probably add a trigger that would load the credits scene (alexandra)
 ===
