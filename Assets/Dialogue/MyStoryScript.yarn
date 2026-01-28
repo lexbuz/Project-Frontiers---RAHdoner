@@ -63,8 +63,10 @@ You: What now?
 
 <<set_enabled_in_unity "Boss3part1">>
 Boss:  Starting to think you're down there wanking or something.
+<<wait  1>>
 <<set_enabled_in_unity "Boss3part2">>
 Boss: How many times do I have to tell you to pick up that phone right away?!
+<<wait  2>>
 
 You: I-
 
@@ -550,38 +552,53 @@ title: DecoyShelf
 
 ===
 
-title: Pills
----
-<<set_enabled_in_unity "PillShake" true>> // plays sound of the pills shaking
-<<set $stresslvl = 0>>
-You: ...that's better...
-//i would like to use more lines but i'm not sure how to randomize them (alexandra)
-//me neither ngl, we could just make a few options later (fran)
-//suggestions: maybe this doesn't fully reset the stress but just lowers it?? like by 2 levels or something (alexandra)
-//mmm, we don't have any code for stress yet, sadly - after we decide what level of stress does what, we could adjust the pills too (fran)
-===
-
 title: Ending
 ---
-//yeah, this whole thing is getting scrapped (alexandra)
-//EDIT: you are full of bullshit alexandra, we are using this (alexandra)
+
 <<disable_controls "Player">>
--> Leave
-	Monster: Hm? Leaving already?
-	Monster: You know...most people don't even make it this far.
-	Monster: So why are you giving up all that hard work that got you here?
-	Monster: How will you even survive on your own if you cannot do a simple job?
-	Monster: Do you have any idea how much we invested in you?
-	Monster: How many people would kill to be in your position right now?
-	Monster: hah...I mean, to be frank, I can easily replace you.
-	Monster: but...
-	Monster: Don't you need this job?
-	You: I need this job...
--> Stay
-//jumpscare coroutine in c# (it already exists no worries)
-//i'll implement it later tho, not in this demo (alexandra)
+<<set_enabled_in_unity "Leave" true>>
+<<set_enabled_in_unity "Stay" true>>
 
+===
 
-	You: I need this job...
-//i'll probably add a trigger that would load the credits scene (alexandra)
+title: EndingLeaving
+---
+
+<<disable_controls "Player">>
+<<set_enabled_in_unity "Monster1" true>>
+Monster: Hm? Leaving already?
+<<wait  0.5>>
+
+<<set_enabled_in_unity "Monster2" true>>
+Monster: You know...most people don't even make it this far.
+<<wait  1>>
+Monster: So why are you giving up all that hard work that got you here?
+<<wait  3>>
+
+<<set_enabled_in_unity "Monster3" true>>
+Monster: How will you even survive on your own if you cannot do a simple job?
+<<wait  4>>
+
+<<set_enabled_in_unity "Monster4" true>>
+Monster: Do you have any idea how much we invested in you?
+<<wait  0.5>>
+Monster: How many people would kill to be in your position right now?
+<<wait  2>>
+
+<<set_enabled_in_unity "Monster5" true>>
+Monster: To be frank, I can easily replace you.
+<<wait  0.5>>
+Monster: Don't you need this job?
+<<wait  0.5>>
+
+You: I need this job...
+
+===
+
+title: EndingStaying
+---
+
+<<disable_controls "Player">>
+You: I need this job...
+
 ===
