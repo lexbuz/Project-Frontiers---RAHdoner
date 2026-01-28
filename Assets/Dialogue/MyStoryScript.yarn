@@ -2,19 +2,10 @@ title: Loop1
 ---
 //Variables setup
 <<declare $loop = 1>>
-<<declare $stresslvl = 0>> //i set the stress level to 0 instead of one so that the UI slider can be empty at start (alexandra)
-//also i changed the max from 6 to 5 bc i'm assuming some math went into deciding the max level so that the player can actually die
-//if it's a problem i can always change it back (alexandra)
 <<declare $files = 0>>
-<<declare $stressTutorial = false>>
-//actually fuck that (alexandra)
-//i have a neater idea for the max stress level (alexandra)
-<<declare $maxStress = 5>>
-//now you can change to whatever feels appropiate without hunting through hundreds of line of code(alexandra)
-
 //Start loop one; player is sitting at the computer with controls disabled; initial dialogue
 <<disable_controls "Player">>
-
+<<set_enabled_in_unity "PCCam" true>>
 You: ...always the same view...day in, day out...
 You: ...
 You: You need this job-
@@ -22,6 +13,8 @@ You: You need this job-
 <<set_enabled_in_unity "PhoneRing" true>> // plays sound of the phone
 You: Ugh...
 You: I was hoping he wouldn't bother me today. // this line exists so players actually listen to the phone ring
+<<set_enabled_in_unity "PCCam" false>>
+<<set_enabled_in_unity "PhoneCam" true>>
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 You: ... // this line is here so that the pickup phone doesnt play AS he is saying "Hello"
 You: Hello-
@@ -42,11 +35,10 @@ Boss: That's what I thought. I need you to fetch me file 6G and 9E.
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 <<set_enabled_in_unity "NoteLoop1" true>> //enable notepad UI for loop 1
 You: *sigh*
+<<set_enabled_in_unity "OfficeChair2" true>> //sound of the chair out
+<<wait  0.5>>
+<<set_enabled_in_unity "PhoneCam" false>>
 You: Better get to work. 
-
-//end of initial dialogue; enable controls and normal camera
-//add UI tutorial later (alexandra)
-//i'll split the tutorial in two - first for basic controls while the player controls are still locked, then for game logic that's going to be enabled when relevant
 
 <<enable_controls "Player">>
 <<set_enabled_in_unity "TimerCanvas" true>>
@@ -57,10 +49,14 @@ title: Loop2
 ---
 //loop 2 dialogue - you should know the drill by now
 <<disable_controls "Player">>
+<<set_enabled_in_unity "PhoneCam" true>>
+<<set_enabled_in_unity "OfficeChair1" false>> //sound of the chair out
+<<set_enabled_in_unity "OfficeChair1" true>> //sound of the chair out
+<<wait  2>>
 You: What now?
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
-
+<<wait  0.5>>
 <<set_enabled_in_unity "Boss3part1">>
 Boss:  Starting to think you're down there wanking or something.
 <<wait  1>>
@@ -76,6 +72,12 @@ Boss: Don't care. I need files 1T, 9W and 7O. I want them now.
 
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
+YOU: Fine...
+<<set_enabled_in_unity "OfficeChair2" false>> //sound of the chair out
+<<set_enabled_in_unity "OfficeChair2" true>> //sound of the chair out
+<<wait  0.5>>
+<<set_enabled_in_unity "PhoneCam" false>>
+<<respawn "Player">>
 <<set_enabled_in_unity "NoteLoop2" true>> //enable notepad UI for loop 2
 
 <<set $loop = 2>>
@@ -85,8 +87,6 @@ Boss: Don't care. I need files 1T, 9W and 7O. I want them now.
 
 <<set_enabled_in_unity "TimerCanvas3" true>>
 <<enable_controls "Player">>
-//idk which node is supposed to go here next logically :/ i think i'm gonna have to make on myself (alexandra)
-// the node for the capsule, after the player gathers the files (fran)
 //logically, move to LoopTrigger node next
 ===
 
@@ -99,6 +99,10 @@ title: Loop3
 <<set_enabled_in_unity "Loop2" false>> //disable loop 2 layout
 <<set_enabled_in_unity "Loop3" true>> //enable loop 3 layout
 <<set_enabled_in_unity "Monster" true>> //enable moster (it's the same one for all loops)
+<<set_enabled_in_unity "PhoneCam" true>>
+<<set_enabled_in_unity "OfficeChair1" false>> //sound of the chair out
+<<set_enabled_in_unity "OfficeChair1" true>> //sound of the chair out
+<<wait  2>>
 You: Phew... 
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
@@ -110,12 +114,17 @@ Boss: Files 10R, 3K and 5D. Now.
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 You: *whisper* ...what and asshole.
+<<set_enabled_in_unity "OfficeChair2" false>> //sound of the chair out
+<<set_enabled_in_unity "OfficeChair2" true>> //sound of the chair out
+<<wait  0.5>>
+<<set_enabled_in_unity "PhoneCam" false>>
+<<respawn "Player">>
 <<set_enabled_in_unity "NoteLoop3" true>> //enable notepad UI for loop 3
 
 <<set_enabled_in_unity "TimerCanvas5" true>> //enable timer for loop 3
 
 <<enable_controls "Player">>
-//logically, move to LoopTrigger node next
+//logically, move to file 3.1 node next
 ===
 
 title:Loop4
@@ -126,6 +135,10 @@ title:Loop4
 <<set_enabled_in_unity "Loop4Start" true>> //enable loop 4 trigger
 <<set_enabled_in_unity "Loop3" false>> //disable loop 3 layout
 <<set_enabled_in_unity "Loop4" true>> //enable loop 4 layout
+<<set_enabled_in_unity "PhoneCam" true>>
+<<set_enabled_in_unity "OfficeChair1" false>> //sound of the chair out
+<<set_enabled_in_unity "OfficeChair1" true>> //sound of the chair out
+<<wait  2>>
 You: ...
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
@@ -137,7 +150,11 @@ Boss: Files 2O, 13N, 3E. Move your ass.
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 You: ...
-
+<<set_enabled_in_unity "OfficeChair2" false>> //sound of the chair out
+<<set_enabled_in_unity "OfficeChair2" true>> //sound of the chair out
+<<wait  0.5>>
+<<set_enabled_in_unity "PhoneCam" false>>
+<<respawn "Player">>
 <<set_enabled_in_unity "NoteLoop4" true>> //enable notepad UI for loop 4
 
 <<enable_controls "Player">>
@@ -159,20 +176,11 @@ title: Capsule
 		<<set_enabled_in_unity "RackFall" true>> // plays sound of the rack falling
 		<<set_enabled_in_unity "RackLoop1" false>> //original rack (alexandra)
 		<<set_enabled_in_unity "RackFallen" true>> //fallen rack (alexandra)
+		<<wait  0.5>>
 		You: !?!
 		You: What the-?!
 		<<set_enabled_in_unity "RingOfficeBack1" true>> //trigger that's going to call the player back to the office
 		//logically, move to RingOfficeBack1 node next
-	<<else>>
-		You: I don’t have the files yet, I should go get them.
-		<<set $stresslvl = $stresslvl + 1>>
-		<<if $stressTutorial == false>> 
-			TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-			<<set $stressTutorial = true>>
-		<<endif>>
-		<<if $stresslvl == $maxStress>>
-			<<set_enabled_in_unity "DIE" true>>
-			<<endif>>
 	<<endif>>
 <<elseif $loop == 2>>
 	<<if $files == 3>>
@@ -188,16 +196,6 @@ title: Capsule
 			<<set_enabled_in_unity "PhoneRingLoop3" true>> // plays sound of the phone, it sounds OFF
 			You: Alright, time to go back.
 			<<set_enabled_in_unity "Loop3Start" true>>
-	<<else>> //personal opinion: i wouldn't repeat the stress tutorial everytime this mistake happens (alexandra)
-			// the tutorial happens only if the stress level is 2... but good point, cuz we can actually now RESTORE our sanity (fran), i think we can do ONe stress tutorial and delete the rest
-		You: I don’t have all the files yet, I should go get them.
-			<<set $stresslvl = $stresslvl + 1>>
-			<<if $stresslvl == 2>>
-				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-			<<endif>>
-			<<if $stresslvl == $maxStress>>
-			<<set_enabled_in_unity "DIE" true>>
-			<<endif>>
 	<<endif>>
 	//logically, move to Loop3 node next
 <<elseif $loop == 3>>
@@ -213,15 +211,6 @@ title: Capsule
 		<<set_enabled_in_unity "PhoneRingLoop4" true>> // plays sound of the phone that is even worse
 		You: I better get back to the office...
 		<<set_enabled_in_unity "Loop4Start" true>>
-	<<else>> //personal opinion: same here about the stress tutorial (alexandra)
-		You: I don’t have all the files yet, I should go get them.
-			<<set $stresslvl = $stresslvl + 1>>
-			<<if $stresslvl == 2>>
-				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-			<<endif>>
-			<<if $stresslvl == $maxStress>>
-			<<set_enabled_in_unity "DIE" true>>
-			<<endif>>
 	<<endif>>
 	//logically, move to Loop4 node next
 <<elseif $loop == 4>>
@@ -232,24 +221,16 @@ title: Capsule
 		<<set_enabled_in_unity "3E" false>>
 		<<set_enabled_in_unity "13N" false>>
 		<<set_enabled_in_unity "2O" false>>
+		<<set_enabled_in_unity "Office" false>> //removes the initial office from the scene
 		<<set_enabled_in_unity "TimerCanvas7" false>> //disable timer >:( (alexandra) // that is a diff one (fran)
 		<<set_enabled_in_unity "Loop4" false>> //disable loop 4 layout
-		<<set_enabled_in_unity "main" false>> //disable main layout
+		<<set_enabled_in_unity "WallForOffice" false>> //disable the wall at the office
 		<<set_enabled_in_unity "Loop4chase" true>> //enable chase layout
 		<<set $files = 0>>
 		<<set_enabled_in_unity "ENDING" true>> //enable ending trigger
 		You: ...Offi- office... I need to get to the office-
 		<<set_enabled_in_unity "SpeedToggle" true>> //enable speed toggle for chase
 		//logically, move to Ending node next
-	<<else>>
-		You: I don’t have all the files yet, I should go get them.
-			<<set $stresslvl = $stresslvl + 1>>
-			<<if $stresslvl == 2>>
-				TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-			<<endif>>
-			<<if $stresslvl == $maxStress>>
-			<<set_enabled_in_unity "DIE" true>>
-			<<endif>>
 	<<endif>>
 <<endif>>
 <<enable_controls "Player">>
@@ -277,7 +258,6 @@ title: ArchiveShelf11
 //name: archive shelf loop 1 file 1
 //game logic for picking up one of the files from the shelf in loop 1
 <<disable_controls "Player">>
-//i'm not sure why the player controls have to be disabled here?? (alexandra)
 <<if $loop == 1>>
 	<<set $files = $files + 1>>
 	<<set_enabled_in_unity "FilePickUp" false>> //it won't work without this
@@ -515,48 +495,19 @@ title: ArchiveShelf43
 //logically, move to Capsule node next
 ===
 
-title: LoopTrigger
----
-<<disable_controls "Player">>
-<<if $loop == 2>>
-	You: Why am I seeing things again...
-<<endif>>
-//logically, move to ArchiveShelf21 node next
-<<if $loop == 3>>
-	You: Were they always like that...?
-<<endif>>
-//logically, move to ArchiveShelf31 node next
-//there are some alternative lines in the doc, i'm just gonna leave this here for now (alexandra)
-<<if $loop == 4>>
-	DEBUG:camera focuses on the monster (damla we love you <3)
-	You: ...I need to get the files...(keeps repeating this a few times while running around)
-	//now there are 2 ways i can do this (alexandra)
-	//i can just repeat the line of code with a "wait 2 seconds" command in between a few times
-	//or i can do it in c# with a coroutine that makes the player say the line every few seconds while in the loop
-	//i'll let you guys choose (alexandra)
-<<endif>>
-//logically, move to ArchiveShelf41 node next
-<<enable_controls "Player">>
-===
 title: DecoyShelf
 ---
 
-<<set $stresslvl = $stresslvl + 1>>
-	<<if $stressTutorial == false>>
-		TUTORIAL: explaining how stress and mistakes work (idk if we need this)
-		<<set $stressTutorial = true>>
-	<<endif>>
-	<<if $stresslvl == $maxStress>>
-		<<set_enabled_in_unity "DIE" true>>
-	<<endif>>
+YOU: That is not the file I need...
+YOU: Gotta hurry up.
 
 ===
 
 title: Ending
 ---
 
-<<disable_controls "Player">>
-<<set_enabled_in_unity "Leave" true>>
+<<disable_controls "Player">> // dont move
+<<set_enabled_in_unity "Leave" true>> //choooose :D
 <<set_enabled_in_unity "Stay" true>>
 
 ===
