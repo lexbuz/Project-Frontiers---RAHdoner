@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5515203369073305648}
   - component: {fileID: 5360183841951461866}
   - component: {fileID: 415801341602473725}
+  - component: {fileID: -2067493226256751499}
   m_Layer: 0
   m_Name: "box_m\xFDn\xFD_open"
   m_TagString: Untagged
@@ -86,3 +87,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-2067493226256751499
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722245604258444035}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 22.857056, y: 13.088741, z: 18.653023}
+  m_Center: {x: 0.000045776367, y: -0.00000047683716, z: -0.0091199875}
