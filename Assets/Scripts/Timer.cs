@@ -25,6 +25,10 @@ public class Timer : MonoBehaviour
             currentTime = 0;
             // Add here whatever needs to happen after the timer ends
             DeathScreen.SetActive(true);
+            if (DeathScreen.activeInHierarchy == false)
+            {
+                currentTime = startingTime;
+            }
         }
 
         int minutes = Mathf.FloorToInt(currentTime / 60);

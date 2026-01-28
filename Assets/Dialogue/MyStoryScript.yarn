@@ -156,6 +156,7 @@ You: ...
 <<set_enabled_in_unity "PhoneCam" false>>
 <<respawn "Player">>
 <<set_enabled_in_unity "NoteLoop4" true>> //enable notepad UI for loop 4
+<<set_enabled TimerCanvas7 true>>
 
 <<enable_controls "Player">>
 ===
