@@ -1,4 +1,4 @@
-﻿title: Loop1
+title: Loop1
 ---
 //Variables setup
 <<declare $loop = 1>>
@@ -25,14 +25,20 @@ Player: I was hoping he wouldn't bother me today. // this line exists so players
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
 Player: ... // this line is here so that the pickup phone doesnt play AS he is saying "Hello"
 Player: Hello-
-Boss: Took you long enough to respond!
+
+<<set_enabled_in_unity "Boss1part1" true>>
+Boss: Took you long enough to respond! 
+<<wait  0.5>>
+<<set_enabled_in_unity "Boss1part2" true>>
 Boss: You know I don't like incompetent employees, right?
+<<wait  0.5>>
 
 Player: Yes, si-
-
+<<set_enabled_in_unity "Boss2" true>>
 Boss: That's what I thought. I need you to fetch me file 6G and 9E.
-Boss: Quickly. 
+<<wait  3>>
 
+<<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 <<set_enabled_in_unity "NoteLoop1" true>> //enable notepad UI for loop 1
 Player: *sigh*
@@ -54,12 +60,18 @@ title: Loop2
 Player: What now?
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
+
+<<set_enabled_in_unity "Boss3part1">>
 Boss:  Starting to think you're down there wanking or something.
+<<set_enabled_in_unity "Boss3part2">>
 Boss: How many times do I have to tell you to pick up that phone right away?!
 
 Player: I-
 
+<<set_enabled_in_unity "Boss4">>
 Boss: Don't care. I need files 1T, 9W and 7O. I want them now.
+<<wait  6>>
+
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 <<set_enabled_in_unity "NoteLoop2" true>> //enable notepad UI for loop 2
@@ -88,7 +100,11 @@ title: Loop3
 Player: Phew... 
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
+
+<<set_enabled_in_unity "Boss5">>
 Boss: Files 10R, 3K and 5D. Now.
+<<wait  3>>
+
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 Player: *whisper* ...what and asshole.
@@ -111,7 +127,11 @@ title:Loop4
 Player: ...
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
-Boss: Files 2O, 13N, 3E. Quick.
+
+<<set_enabled_in_unity "Boss6">>
+Boss: Files 2O, 13N, 3E. Move your ass.
+<<wait  6>>
+
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
 Player: ...

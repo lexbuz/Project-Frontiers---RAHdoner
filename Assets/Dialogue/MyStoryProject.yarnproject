@@ -6,7 +6,12 @@
   "excludeFiles": [
     "**/*~/*"
   ],
-  "localisation": {},
+  "localisation": {
+    "en": {
+      "assets": "..\\Sounds\\FINAL"
+    }
+  },
   "baseLanguage": "en",
-  "compilerOptions": {}
+  "compilerOptions": {},
+  "definitionsFiles": []
 }
