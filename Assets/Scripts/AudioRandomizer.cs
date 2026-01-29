@@ -5,7 +5,6 @@ public class AudioRandomizer : MonoBehaviour
 {
     public AudioSource audioSource;
     [SerializeField] AudioClip[] monsterSounds;
-    [SerializeField] GameObject gameObject;
     private AudioClip activeClip;
     private float waitTime = 0;
     private bool isPlaying = false;
