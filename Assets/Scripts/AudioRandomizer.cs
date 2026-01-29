@@ -20,6 +20,7 @@ public class AudioRandomizer : MonoBehaviour
     {
         isPlaying = true;
         activeClip = monsterSounds[Random.Range(0,monsterSounds.Length)];
+        audioSource.PlayOneShot(activeClip);
         yield return new WaitForSecondsRealtime(waitTime);
     }
 }
