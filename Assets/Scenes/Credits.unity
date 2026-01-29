@@ -824,8 +824,8 @@ MonoBehaviour:
     Damla Tasgin, Fran Tyshchuk, Alexandra Buzila
 
 
-    C# code
-    & implementation
+    Code
+    & Mechanics implementation
 
     Alexandra Buzila
 
@@ -843,7 +843,27 @@ MonoBehaviour:
 
 
     External
-    Assets'
+    Assets
+
+
+    Unity Asset Store
+
+    *
+
+    Abandoned Asylum - Lukas Bobor
+
+    PBR
+    - Hospital Horror Pack - DNK_DEV
+
+
+    SketchFab
+
+    *
+
+    Elevator_ Door_
+    Metal_8_MB - Mehdi Shahsavan
+
+    Fire Escape / Exit Doors - blue man group'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea06a947c31587f43921963bcac2f7ab, type: 2}
   m_sharedMaterial: {fileID: -6474066103793629263, guid: ea06a947c31587f43921963bcac2f7ab,
@@ -1086,6 +1106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1fac3c90c4f46418d04766d36760fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toCredits: {fileID: 0}
 --- !u!4 &2133736177
 Transform:
   m_ObjectHideFlags: 0
