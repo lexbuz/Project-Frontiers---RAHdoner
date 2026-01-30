@@ -511,7 +511,7 @@ Monster: So why are you giving up all that hard work that got you here?
 
 <<set_enabled_in_unity "Monster3" true>>
 Monster: How will you even survive on your own if you cannot do a simple job?
-<<wait  2.5>>
+<<wait  3>>
 
 <<set_enabled_in_unity "Monster4" true>>
 Monster: Do you have any idea how much we invested in you?
@@ -521,7 +521,7 @@ Monster: How many people would kill to be in your position right now?
 
 <<set_enabled_in_unity "Monster5" true>>
 Monster: To be frank, I can easily replace you.
-<<wait  0.5>>
+<<wait  1>>
 Monster: Don't you need this job?
 <<wait  2>>
 
