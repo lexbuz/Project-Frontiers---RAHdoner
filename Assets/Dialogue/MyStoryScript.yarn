@@ -98,7 +98,7 @@ title: Loop3
 <<set_enabled_in_unity "Loop3Start" true>> //enable loop 3 trigger
 <<set_enabled_in_unity "Loop2" false>> //disable loop 2 layout
 <<set_enabled_in_unity "Loop3" true>> //enable loop 3 layout
-<<set_enabled_in_unity "Monster" true>> //enable moster (it's the same one for all loops)
+
 <<set_enabled_in_unity "PhoneCam" true>>
 <<set_enabled_in_unity "OfficeChair1" false>> //sound of the chair out
 <<set_enabled_in_unity "OfficeChair1" true>> //sound of the chair out
@@ -106,7 +106,7 @@ title: Loop3
 You: Phew... 
 <<set_enabled_in_unity "PhonePickUp" false>> 
 <<set_enabled_in_unity "PhonePickUp" true>> // plays sound of picking up the phone
-
+<<wait  0.5>>
 <<set_enabled_in_unity "Boss5">>
 Boss: Files 10R, 3K and 5D. Now.
 <<wait  3>>
@@ -118,11 +118,11 @@ You:...what an asshole.
 <<set_enabled_in_unity "OfficeChair2" true>> //sound of the chair out
 <<wait  0.5>>
 <<set_enabled_in_unity "PhoneCam" false>>
+<<set_enabled_in_unity "Monster" true>> //enable moster (it's the same one for all loops)
 <<respawn "Player">>
 <<set_enabled_in_unity "NoteLoop3" true>> //enable notepad UI for loop 3
 
 <<set_enabled_in_unity "TimerCanvas5" true>> //enable timer for loop 3
-
 <<enable_controls "Player">>
 //logically, move to file 3.1 node next
 ===
@@ -507,7 +507,7 @@ Monster: Hm? Leaving already?
 Monster: You know...most people don't even make it this far.
 <<wait  1>>
 Monster: So why are you giving up all that hard work that got you here?
-<<wait  1>>
+<<wait  1.5>>
 
 <<set_enabled_in_unity "Monster3" true>>
 Monster: How will you even survive on your own if you cannot do a simple job?
