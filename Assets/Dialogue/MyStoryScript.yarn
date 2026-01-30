@@ -113,7 +113,7 @@ Boss: Files 10R, 3K and 5D. Now.
 
 <<set_enabled_in_unity "PhoneHangUp" false>>
 <<set_enabled_in_unity "PhoneHangUp" true>> //plays the sound of hanging up the phone
-You:...what and asshole.
+You:...what an asshole.
 <<set_enabled_in_unity "OfficeChair2" false>> //sound of the chair out
 <<set_enabled_in_unity "OfficeChair2" true>> //sound of the chair out
 <<wait  0.5>>
