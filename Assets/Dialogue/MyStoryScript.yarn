@@ -155,6 +155,7 @@ You: ...
 <<wait  0.5>>
 <<set_enabled_in_unity "PhoneCam" false>>
 <<respawn "Player">>
+<<set_enabled_in_unity "HeavyBreathing" true>>
 <<set_enabled_in_unity "NoteLoop4" true>> //enable notepad UI for loop 4
 <<set_enabled "TimerCanvas7" true>>
 
@@ -226,6 +227,9 @@ title: Capsule
 		<<set_enabled_in_unity "Loop4" false>> //disable loop 4 layout
 		<<set_enabled_in_unity "WallForOffice" false>> //disable the wall at the office
 		<<set_enabled_in_unity "Loop4chase" true>> //enable chase layout
+		<<set_enabled_in_unity "HeavyBreathing" false>>
+		<<set_enabled_in_unity "FasterBreathing" true>>
+		<<set_enabled_in_unity "HeartBeat" true>>
 		<<set $files = 0>>
 		<<set_enabled_in_unity "ENDING" true>> //enable ending trigger
 		You: ...Offi- office... I need to get to the office-
@@ -482,7 +486,9 @@ YOU: Gotta hurry up.
 
 title: Ending
 ---
-
+<<set_enabled_in_unity "FasterBreathing" false>>
+<<set_enabled_in_unity "Monster" false>>
+<<set_enabled_in_unity "HeartBeat" false>>
 <<disable_controls "Player">> // dont move
 <<set_enabled_in_unity "Leave" true>> //choooose :D
 <<set_enabled_in_unity "Stay" true>>
@@ -505,13 +511,13 @@ Monster: So why are you giving up all that hard work that got you here?
 
 <<set_enabled_in_unity "Monster3" true>>
 Monster: How will you even survive on your own if you cannot do a simple job?
-<<wait  2>>
+<<wait  2.5>>
 
 <<set_enabled_in_unity "Monster4" true>>
 Monster: Do you have any idea how much we invested in you?
 <<wait  0.5>>
 Monster: How many people would kill to be in your position right now?
-<<wait  1>>
+<<wait  2>>
 
 <<set_enabled_in_unity "Monster5" true>>
 Monster: To be frank, I can easily replace you.
