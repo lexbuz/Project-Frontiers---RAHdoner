@@ -3,24 +3,25 @@ using UnityEngine;
 
 public class AudioRandomizer : MonoBehaviour
 {
-    public AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] AudioClip[] monsterSounds;
     private AudioClip activeClip;
-    private float waitTime = 0;
-    private bool isPlaying = false;
 
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void Update()
     {
-        if(isPlaying == false)
+        if(!audioSource.isPlaying)
         {
             PlayRandomSound();
         }
     }
-    IEnumerator PlayRandomSound()
+    public void PlayRandomSound()
     {
-        isPlaying = true;
         activeClip = monsterSounds[Random.Range(0,monsterSounds.Length)];
         audioSource.PlayOneShot(activeClip);
-        yield return new WaitForSecondsRealtime(waitTime);
+        Debug.Log("sound played");
     }
 }

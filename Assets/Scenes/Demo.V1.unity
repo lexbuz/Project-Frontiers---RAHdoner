@@ -310181,8 +310181,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 1.5
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -310269,7 +310269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5253945d341834b96c4a9031084758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1758704655}
   monsterSounds:
   - {fileID: 8300000, guid: 1bd2f6142992f314ca1fa2d54fdc5492, type: 3}
   - {fileID: 8300000, guid: 79a58b43804a21b4b8269bdc1c62ef63, type: 3}
